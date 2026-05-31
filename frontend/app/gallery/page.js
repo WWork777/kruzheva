@@ -143,7 +143,7 @@ function ItemSection({ item, index }) {
       </div>
 
       {/* Photo grid */}
-      <div style={{ display: 'grid', gridTemplateColumns: `repeat(${cols}, 1fr)`, gap: 8 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, 260px)', gap: 8 }}>
         {item.photos.map((photo, i) => (
           <PhotoCell key={i} src={`/items/${item.id}/${photo}`} index={i} total={item.photos.length} onOpen={() => openPhoto(i)} />
         ))}
