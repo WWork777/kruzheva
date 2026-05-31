@@ -180,7 +180,7 @@ function PhotoCell({ src, onOpen, index, total }) {
       }}
     >
       <img src={src} alt="" loading="lazy"
-        style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', display: 'block', transform: h ? 'scale(1.03)' : 'scale(1)', transition: 'transform .9s cubic-bezier(.2,.8,.2,1)' }}
+        style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'contain', display: 'block', transform: h ? 'scale(1.03)' : 'scale(1)', transition: 'transform .9s cubic-bezier(.2,.8,.2,1)' }}
       />
     </div>
   )
