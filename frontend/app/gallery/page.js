@@ -80,17 +80,21 @@ function GalleryItem({ src, id, onOpen, index }) {
         background: CARD,
       }}
     >
-      <img
-        src={src}
-        alt={`Работа ателье Кружева ${id + 1}`}
-        loading="lazy"
-        style={{
-          width: '100%', height: 'auto', display: 'block',
-          transform: h ? 'scale(1.05)' : 'scale(1)',
-          filter: h ? 'brightness(1.08)' : 'brightness(0.88)',
-          transition: 'transform 1s cubic-bezier(.2,.8,.2,1), filter .4s',
-        }}
-      />
+      <div style={{ position: 'relative', paddingBottom: '133%', background: CARD }}>
+        <img
+          src={src}
+          alt={`Работа ателье Кружева ${id + 1}`}
+          loading="lazy"
+          style={{
+            position: 'absolute', inset: 0,
+            width: '100%', height: '100%', display: 'block',
+            objectFit: 'cover',
+            transform: h ? 'scale(1.05)' : 'scale(1)',
+            filter: h ? 'brightness(1.08)' : 'brightness(0.88)',
+            transition: 'transform 1s cubic-bezier(.2,.8,.2,1), filter .4s',
+          }}
+        />
+      </div>
       {/* Hover overlay */}
       <div style={{
         position: 'absolute', inset: 0,
