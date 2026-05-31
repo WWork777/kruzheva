@@ -1221,6 +1221,191 @@ const STEPS = [
   { num: '04', title: 'Финальная примерка', desc: 'Все примерки включены в стоимость. Дорабатываем до идеального результата.' },
 ]
 
+// ============ WORKS (готовые изделия) ============
+const WORKS = [
+  { id: 'item_01', title: 'Жакет Шанель',       material: 'Твид, натуральный шёлк',                                           photos: ['photo_2026-05-31_19-44-52.jpg','photo_2026-05-31_19-44-53.jpg','photo_2026-05-31_19-44-54.jpg','photo_2026-05-31_19-44-54_2.jpg','photo_2026-05-31_19-44-55.jpg','photo_2026-05-31_19-44-55_2.jpg','photo_2026-05-31_19-45-56.jpg'] },
+  { id: 'item_02', title: 'Бомбер',              material: 'Твид, подкладка — вискоза 100%',                                   photos: ['photo_2026-05-31_19-47-05.jpg','photo_2026-05-31_19-47-06.jpg','photo_2026-05-31_19-47-08.jpg','photo_2026-05-31_19-47-09.jpg','photo_2026-05-31_19-47-10.jpg'] },
+  { id: 'item_03', title: 'Жакет',               material: 'Твид, натуральный шёлк',                                           photos: ['photo_2026-05-30_20-43-52.jpg','photo_2026-05-30_20-44-59.jpg','photo_2026-05-31_19-48-26.jpg','photo_2026-05-31_19-48-27.jpg','photo_2026-05-31_19-48-35.jpg','photo_2026-05-31_19-48-43.jpg'] },
+  { id: 'item_04', title: 'Жакет',               material: 'Твид, натуральный шёлк',                                           photos: ['photo_2026-05-31_19-50-50.jpg','photo_2026-05-31_19-50-52.jpg','photo_2026-05-31_19-50-53.jpg','photo_2026-05-31_19-50-56.jpg','photo_2026-05-31_19-50-56_2.jpg','photo_2026-05-31_19-50-58.jpg'] },
+  { id: 'item_05', title: 'Тренч',               material: 'Костюмная ткань двусторонняя (Италия), подкладка — вискоза 100%',  photos: ['photo_2026-04-20_16-24-12.jpg','photo_2026-04-20_16-24-21.jpg','photo_2026-05-30_20-45-01.jpg','photo_2026-05-31_19-55-12.jpg','photo_2026-05-31_19-55-15.jpg','photo_2026-05-31_19-55-18.jpg'] },
+  { id: 'item_06', title: 'Укороченный тренч',   material: 'Ткань Рип-стоп, хлопок (Италия)',                                  photos: ['photo_2026-05-31_19-59-36.jpg','photo_2026-05-31_19-59-37.jpg','photo_2026-05-31_19-59-38.jpg','photo_2026-05-31_19-59-41.jpg','photo_2026-05-31_19-59-42.jpg'] },
+  { id: 'item_07', title: 'Рубашка',             material: 'Хлопок',                                                           photos: ['photo_2026-05-31_20-01-07.jpg','photo_2026-05-31_20-01-11.jpg','photo_2026-05-31_20-01-13.jpg'] },
+  { id: 'item_08', title: 'Рубашка',             material: 'Хлопок (Португалия)',                                              photos: ['photo_2026-05-30_20-57-48.jpg','photo_2026-05-30_20-59-03.jpg','photo_2026-05-30_20-59-04.jpg','photo_2026-05-31_20-04-12.jpg','photo_2026-05-31_20-04-14.jpg','photo_2026-05-31_20-04-16.jpg'] },
+  { id: 'item_09', title: 'Блуза',               material: 'Лён 100%',                                                         photos: ['photo_2026-05-31_20-07-48.jpg','photo_2026-05-31_20-07-49.jpg','photo_2026-05-31_20-07-52.jpg'] },
+  { id: 'item_10', title: 'Рубашка',             material: 'Хлопок',                                                           photos: ['photo_2026-05-31_20-17-56.jpg','photo_2026-05-31_20-17-56_2.jpg'] },
+  { id: 'item_11', title: 'Блуза',               material: 'Натуральный крепдешин',                                            photos: ['photo_2026-05-31_20-21-31.jpg','photo_2026-05-31_20-21-33.jpg','photo_2026-05-31_20-21-34.jpg','photo_2026-05-31_20-21-36.jpg'] },
+  { id: 'item_12', title: 'Куртка из меха',      material: 'Стриженный бобёр, норка, натуральная замша',                       photos: ['photo_2026-05-30_20-53-55.jpg','photo_2026-05-31_20-24-17.jpg','photo_2026-05-31_20-24-19.jpg'] },
+  { id: 'item_13', title: 'Опушка на воротник',  material: 'Мех енота',                                                        photos: ['photo_2026-01-14_13-16-34.jpg','photo_2026-05-31_20-25-42.jpg'] },
+]
+
+function WorksModal({ item, onClose }) {
+  const [idx, setIdx] = useState(0)
+  const total = item.photos.length
+  const prev = () => setIdx(i => (i > 0 ? i - 1 : total - 1))
+  const next = () => setIdx(i => (i < total - 1 ? i + 1 : 0))
+
+  useEffect(() => {
+    const onKey = e => { if (e.key === 'Escape') onClose(); if (e.key === 'ArrowLeft') prev(); if (e.key === 'ArrowRight') next() }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [])
+
+  useEffect(() => { document.body.style.overflow = 'hidden'; return () => { document.body.style.overflow = '' } }, [])
+
+  const src = i => `/items/${item.id}/${item.photos[i]}`
+
+  return (
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.25 }}
+      onClick={onClose}
+      style={{ position: 'fixed', inset: 0, zIndex: 600, background: 'rgba(5,12,8,.97)', backdropFilter: 'blur(10px)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}
+    >
+      {/* Close */}
+      <button onClick={onClose} style={{ position: 'absolute', top: 20, right: 24, background: 'none', border: `1px solid rgba(201,168,76,.3)`, color: '#8ab09a', cursor: 'pointer', width: 44, height: 44, display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'all .2s' }}
+        onMouseEnter={e => { e.currentTarget.style.borderColor = '#c9a84c'; e.currentTarget.style.color = '#c9a84c' }}
+        onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(201,168,76,.3)'; e.currentTarget.style.color = '#8ab09a' }}
+      ><X size={20} strokeWidth={1.5}/></button>
+
+      {/* Title */}
+      <div onClick={e => e.stopPropagation()} style={{ textAlign: 'center', marginBottom: 20 }}>
+        <div style={{ color: '#c9a84c', fontSize: 11, letterSpacing: '4px', textTransform: 'uppercase', fontFamily: 'Inter,sans-serif', fontWeight: 500, marginBottom: 6 }}>Готовое изделие</div>
+        <h3 style={{ color: '#f5f0e8', fontSize: 'clamp(20px,2.5vw,30px)', fontFamily: 'Georgia,serif', fontStyle: 'italic', fontWeight: 400, margin: 0 }}>{item.title}</h3>
+        <p style={{ color: '#8ab09a', fontSize: 13, fontFamily: 'Inter,sans-serif', fontWeight: 300, marginTop: 6 }}>{item.material}</p>
+      </div>
+
+      {/* Main photo */}
+      <div onClick={e => e.stopPropagation()} style={{ position: 'relative', display: 'flex', alignItems: 'center', gap: 16 }}>
+        <button onClick={prev} style={{ background: 'rgba(201,168,76,.15)', border: `1px solid rgba(201,168,76,.3)`, color: '#c9a84c', cursor: 'pointer', width: 44, height: 44, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, transition: 'background .2s' }}
+          onMouseEnter={e => e.currentTarget.style.background = 'rgba(201,168,76,.3)'}
+          onMouseLeave={e => e.currentTarget.style.background = 'rgba(201,168,76,.15)'}
+        ><ChevronLeft size={22} strokeWidth={1.8}/></button>
+
+        <AnimatePresence mode="wait">
+          <motion.img key={idx} src={src(idx)} alt={`${item.title} ${idx+1}`}
+            initial={{ opacity: 0, scale: 0.97 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.97 }}
+            transition={{ duration: 0.25 }}
+            style={{ maxWidth: 'min(520px, 70vw)', maxHeight: '55vh', objectFit: 'contain', border: `1px solid rgba(201,168,76,.2)`, display: 'block' }}
+          />
+        </AnimatePresence>
+
+        <button onClick={next} style={{ background: 'rgba(201,168,76,.15)', border: `1px solid rgba(201,168,76,.3)`, color: '#c9a84c', cursor: 'pointer', width: 44, height: 44, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, transition: 'background .2s' }}
+          onMouseEnter={e => e.currentTarget.style.background = 'rgba(201,168,76,.3)'}
+          onMouseLeave={e => e.currentTarget.style.background = 'rgba(201,168,76,.15)'}
+        ><ChevronRight size={22} strokeWidth={1.8}/></button>
+      </div>
+
+      {/* Counter */}
+      <div onClick={e => e.stopPropagation()} style={{ display: 'flex', alignItems: 'center', gap: 12, marginTop: 16 }}>
+        <div style={{ width: 28, height: 1, background: 'rgba(201,168,76,.3)' }}/>
+        <span style={{ color: '#8ab09a', fontSize: 11, fontFamily: 'Inter,sans-serif', letterSpacing: '3px' }}>{idx+1} / {total}</span>
+        <div style={{ width: 28, height: 1, background: 'rgba(201,168,76,.3)' }}/>
+      </div>
+
+      {/* Thumbnails */}
+      {total > 1 && (
+        <div onClick={e => e.stopPropagation()} style={{ display: 'flex', gap: 8, marginTop: 14, flexWrap: 'wrap', justifyContent: 'center', maxWidth: '80vw' }}>
+          {item.photos.map((p, i) => (
+            <div key={i} onClick={() => setIdx(i)} style={{ width: 52, height: 52, cursor: 'pointer', border: `1.5px solid ${i === idx ? '#c9a84c' : 'rgba(201,168,76,.2)'}`, overflow: 'hidden', flexShrink: 0, opacity: i === idx ? 1 : 0.55, transition: 'all .2s' }}>
+              <img src={src(i)} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }}/>
+            </div>
+          ))}
+        </div>
+      )}
+    </motion.div>
+  )
+}
+
+function WorksSection() {
+  const [active, setActive] = useState(null)
+  const mobile = useIsMobile()
+  const trackRef = useRef(null)
+
+  const scroll = dir => {
+    if (!trackRef.current) return
+    trackRef.current.scrollBy({ left: dir * 320, behavior: 'smooth' })
+  }
+
+  return (
+    <section style={{ padding: mobile ? '72px 0' : '100px 0', background: '#0a1510', position: 'relative', overflow: 'hidden' }}>
+      <LaceBgPattern opacity={0.03}/>
+      <div style={{ maxWidth: 1280, margin: '0 auto', position: 'relative' }}>
+        <Reveal>
+          <div style={{ textAlign: 'center', marginBottom: 52, padding: '0 28px' }}>
+            <SectionEye>Авторские работы</SectionEye>
+            <h2 style={{ fontSize: 'clamp(34px,4.3vw,58px)', fontFamily: 'Georgia,serif', color: '#f5f0e8', fontWeight: 300, letterSpacing: '-0.5px' }}>
+              Готовые <span style={{ color: '#c9a84c', fontStyle: 'italic' }}>изделия</span>
+            </h2>
+          </div>
+        </Reveal>
+
+        {/* Prev/Next */}
+        {!mobile && (
+          <>
+            <button onClick={() => scroll(-1)} style={{ position: 'absolute', left: 0, top: '50%', transform: 'translateY(-50%)', zIndex: 10, background: 'rgba(10,21,16,.9)', border: `1px solid rgba(201,168,76,.3)`, color: '#c9a84c', cursor: 'pointer', width: 44, height: 44, display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'background .2s' }}
+              onMouseEnter={e => e.currentTarget.style.background = 'rgba(201,168,76,.15)'}
+              onMouseLeave={e => e.currentTarget.style.background = 'rgba(10,21,16,.9)'}
+            ><ChevronLeft size={20} strokeWidth={1.8}/></button>
+            <button onClick={() => scroll(1)} style={{ position: 'absolute', right: 0, top: '50%', transform: 'translateY(-50%)', zIndex: 10, background: 'rgba(10,21,16,.9)', border: `1px solid rgba(201,168,76,.3)`, color: '#c9a84c', cursor: 'pointer', width: 44, height: 44, display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'background .2s' }}
+              onMouseEnter={e => e.currentTarget.style.background = 'rgba(201,168,76,.15)'}
+              onMouseLeave={e => e.currentTarget.style.background = 'rgba(10,21,16,.9)'}
+            ><ChevronRight size={20} strokeWidth={1.8}/></button>
+          </>
+        )}
+
+        {/* Track */}
+        <div ref={trackRef} style={{ display: 'flex', gap: 16, overflowX: 'auto', padding: mobile ? '8px 20px 24px' : '8px 52px 24px', scrollSnapType: 'x mandatory', scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+          {WORKS.map((w, i) => (
+            <WorkCard key={i} item={w} index={i} onOpen={() => setActive(w)} />
+          ))}
+        </div>
+      </div>
+
+      <AnimatePresence>
+        {active && <WorksModal item={active} onClose={() => setActive(null)} />}
+      </AnimatePresence>
+    </section>
+  )
+}
+
+function WorkCard({ item, index, onOpen }) {
+  const [h, setH] = useState(false)
+  const ref = useRef(null)
+  const inView = useInView(ref, { once: true, margin: '-40px' })
+  const cover = `/items/${item.id}/${item.photos[0]}`
+
+  return (
+    <motion.div ref={ref}
+      initial={{ opacity: 0, y: 24 }} animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.55, delay: (index % 6) * 0.07, ease: [0.16, 0.84, 0.44, 1] }}
+      onClick={onOpen}
+      onMouseEnter={() => setH(true)} onMouseLeave={() => setH(false)}
+      style={{ flexShrink: 0, width: 260, scrollSnapAlign: 'start', cursor: 'pointer', position: 'relative', border: `1px solid ${h ? 'rgba(201,168,76,.5)' : 'rgba(201,168,76,.15)'}`, transition: 'border-color .3s', background: '#111e17' }}
+    >
+      {/* Photo */}
+      <div style={{ position: 'relative', paddingBottom: '133%', overflow: 'hidden' }}>
+        <img src={cover} alt={item.title} loading="lazy"
+          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', transform: h ? 'scale(1.06)' : 'scale(1)', transition: 'transform 0.9s cubic-bezier(.2,.8,.2,1)' }}
+        />
+        {/* Overlay */}
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(10,21,16,.85) 0%, transparent 50%)', opacity: h ? 1 : 0.6, transition: 'opacity .3s' }}/>
+        {/* Photo count */}
+        <div style={{ position: 'absolute', top: 10, right: 10, background: 'rgba(10,21,16,.75)', backdropFilter: 'blur(4px)', border: `1px solid rgba(201,168,76,.25)`, padding: '3px 8px', color: '#8ab09a', fontSize: 10, fontFamily: 'Inter,sans-serif', letterSpacing: '1px' }}>
+          {item.photos.length} фото
+        </div>
+      </div>
+      {/* Info */}
+      <div style={{ padding: '14px 16px 18px' }}>
+        <h3 style={{ color: '#f5f0e8', fontSize: 16, fontFamily: 'Georgia,serif', fontStyle: 'italic', fontWeight: 400, margin: '0 0 6px' }}>{item.title}</h3>
+        <p style={{ color: '#8ab09a', fontSize: 12, fontFamily: 'Inter,sans-serif', fontWeight: 300, margin: 0, lineHeight: 1.5 }}>{item.material}</p>
+      </div>
+      {/* View hint */}
+      <motion.div animate={{ opacity: h ? 1 : 0 }} style={{ position: 'absolute', bottom: 18, right: 16, display: 'flex', alignItems: 'center', gap: 6, color: '#c9a84c' }}>
+        <span style={{ fontSize: 10, letterSpacing: '2px', textTransform: 'uppercase', fontFamily: 'Inter,sans-serif' }}>Смотреть</span>
+        <ChevronRight size={12} strokeWidth={2}/>
+      </motion.div>
+    </motion.div>
+  )
+}
+
 function Process() {
   const mobile = useIsMobile()
   return (
@@ -2186,6 +2371,7 @@ export default function App() {
 
         {/* — Уровень 2: тёплый клиент — */}
         <Services />
+        <WorksSection />
         <Process />
 
         {/* — Уровень 3: въедливый — */}
