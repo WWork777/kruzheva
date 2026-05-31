@@ -1338,25 +1338,25 @@ function WorksSection() {
           </div>
         </Reveal>
 
-        {/* Prev/Next */}
-        {!mobile && (
-          <>
-            <button onClick={() => scroll(-1)} style={{ position: 'absolute', left: 0, top: '50%', transform: 'translateY(-50%)', zIndex: 10, background: 'rgba(10,21,16,.9)', border: `1px solid rgba(201,168,76,.3)`, color: '#c9a84c', cursor: 'pointer', width: 44, height: 44, display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'background .2s' }}
-              onMouseEnter={e => e.currentTarget.style.background = 'rgba(201,168,76,.15)'}
-              onMouseLeave={e => e.currentTarget.style.background = 'rgba(10,21,16,.9)'}
-            ><ChevronLeft size={20} strokeWidth={1.8}/></button>
-            <button onClick={() => scroll(1)} style={{ position: 'absolute', right: 0, top: '50%', transform: 'translateY(-50%)', zIndex: 10, background: 'rgba(10,21,16,.9)', border: `1px solid rgba(201,168,76,.3)`, color: '#c9a84c', cursor: 'pointer', width: 44, height: 44, display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'background .2s' }}
-              onMouseEnter={e => e.currentTarget.style.background = 'rgba(201,168,76,.15)'}
-              onMouseLeave={e => e.currentTarget.style.background = 'rgba(10,21,16,.9)'}
-            ><ChevronRight size={20} strokeWidth={1.8}/></button>
-          </>
-        )}
-
-        {/* Track */}
-        <div ref={trackRef} style={{ display: 'flex', gap: 16, overflowX: 'auto', padding: mobile ? '8px 20px 24px' : '8px 52px 24px', scrollSnapType: 'x mandatory', scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-          {WORKS.map((w, i) => (
-            <WorkCard key={i} item={w} index={i} onOpen={() => setActive(w)} />
-          ))}
+        {/* Track + arrows wrapper */}
+        <div style={{ position: 'relative' }}>
+          {!mobile && (
+            <>
+              <button onClick={() => scroll(-1)} style={{ position: 'absolute', left: -22, top: '50%', transform: 'translateY(-50%)', zIndex: 10, background: 'rgba(10,21,16,.9)', border: `1px solid rgba(201,168,76,.3)`, color: '#c9a84c', cursor: 'pointer', width: 44, height: 44, display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'background .2s' }}
+                onMouseEnter={e => e.currentTarget.style.background = 'rgba(201,168,76,.15)'}
+                onMouseLeave={e => e.currentTarget.style.background = 'rgba(10,21,16,.9)'}
+              ><ChevronLeft size={20} strokeWidth={1.8}/></button>
+              <button onClick={() => scroll(1)} style={{ position: 'absolute', right: -22, top: '50%', transform: 'translateY(-50%)', zIndex: 10, background: 'rgba(10,21,16,.9)', border: `1px solid rgba(201,168,76,.3)`, color: '#c9a84c', cursor: 'pointer', width: 44, height: 44, display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'background .2s' }}
+                onMouseEnter={e => e.currentTarget.style.background = 'rgba(201,168,76,.15)'}
+                onMouseLeave={e => e.currentTarget.style.background = 'rgba(10,21,16,.9)'}
+              ><ChevronRight size={20} strokeWidth={1.8}/></button>
+            </>
+          )}
+          <div ref={trackRef} style={{ display: 'flex', gap: 16, overflowX: 'auto', padding: mobile ? '8px 20px 24px' : '8px 28px 24px', scrollSnapType: 'x mandatory', scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+            {WORKS.map((w, i) => (
+              <WorkCard key={i} item={w} index={i} onOpen={() => setActive(w)} />
+            ))}
+          </div>
         </div>
       </div>
 
