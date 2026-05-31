@@ -124,7 +124,7 @@ function ItemSection({ item, index }) {
   const prev = () => setLightbox(i => (i > 0 ? i - 1 : item.photos.length - 1))
   const next = () => setLightbox(i => (i < item.photos.length - 1 ? i + 1 : 0))
 
-  const cols = item.photos.length === 1 ? 1 : item.photos.length === 2 ? 2 : item.photos.length <= 4 ? 2 : item.photos.length <= 6 ? 3 : 4
+  const cols = item.photos.length <= 1 ? 1 : item.photos.length <= 2 ? 2 : item.photos.length <= 3 ? 3 : 4
 
   return (
     <motion.div
