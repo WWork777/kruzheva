@@ -175,13 +175,14 @@ function PhotoCell({ src, onOpen, index, total }) {
         border: `1px solid ${h ? BDR2 : BDR}`,
         transition: 'border-color .3s',
         background: CARD,
+        height: spanTwo ? 420 : 380,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
       }}
     >
       <img src={src} alt="" loading="lazy"
-        style={{ width: '100%', height: 'auto', display: 'block', transform: h ? 'scale(1.03)' : 'scale(1)', transition: 'transform .9s cubic-bezier(.2,.8,.2,1)' }}
+        style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block', transform: h ? 'scale(1.03)' : 'scale(1)', transition: 'transform .9s cubic-bezier(.2,.8,.2,1)' }}
       />
     </div>
   )
