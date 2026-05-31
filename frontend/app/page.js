@@ -1342,6 +1342,14 @@ function WorksSection() {
             <h2 style={{ fontSize: 'clamp(34px,4.3vw,58px)', fontFamily: 'Georgia,serif', color: '#f5f0e8', fontWeight: 300, letterSpacing: '-0.5px' }}>
               Готовые <span style={{ color: '#c9a84c', fontStyle: 'italic' }}>изделия</span>
             </h2>
+            <div style={{ marginTop: 28 }}>
+              <a href="/gallery" style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '12px 32px', border: `1px solid rgba(201,168,76,.5)`, color: '#c9a84c', textDecoration: 'none', fontSize: 12, fontFamily: 'Inter,sans-serif', fontWeight: 500, letterSpacing: '3px', textTransform: 'uppercase', transition: 'background .25s, border-color .25s' }}
+                onMouseEnter={e => { e.currentTarget.style.background = 'rgba(201,168,76,.1)'; e.currentTarget.style.borderColor = '#c9a84c' }}
+                onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.borderColor = 'rgba(201,168,76,.5)' }}
+              >
+                Смотреть все <ChevronRight size={14} strokeWidth={1.8}/>
+              </a>
+            </div>
           </div>
         </Reveal>
 

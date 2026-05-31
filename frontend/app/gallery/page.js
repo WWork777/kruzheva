@@ -194,27 +194,22 @@ export default function GalleryPage() {
     <div style={{ background: BG, minHeight: '100vh', color: W, fontFamily: B, overflowX: 'hidden' }}>
 
       {/* Sticky header */}
-      <div style={{ position: 'sticky', top: 0, zIndex: 200, background: 'rgba(10,21,16,.96)', backdropFilter: 'blur(16px)', borderBottom: `1px solid ${BDR}`, padding: '0 28px', height: 72, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+      <div style={{ position: 'sticky', top: 0, zIndex: 200, background: 'rgba(10,21,16,.96)', backdropFilter: 'blur(16px)', borderBottom: `1px solid ${BDR}`, padding: '0 28px', height: 64, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div style={{ color: G, fontSize: 20, fontWeight: 400, letterSpacing: '7px', fontFamily: D, textTransform: 'uppercase', fontStyle: 'italic' }}>Кружева</div>
+      </div>
+
+      {/* Back link */}
+      <div style={{ padding: '28px 28px 0' }}>
         <Link href="/" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, color: MUT, textDecoration: 'none', fontSize: 11, fontFamily: B, letterSpacing: '2px', textTransform: 'uppercase', transition: 'color .3s' }}
           onMouseEnter={e => e.currentTarget.style.color = G}
           onMouseLeave={e => e.currentTarget.style.color = MUT}
         >
           <ChevronLeft size={14} strokeWidth={1.6}/> На главную
         </Link>
-
-        <div style={{ color: G, fontSize: 22, fontWeight: 400, letterSpacing: '7px', fontFamily: D, textTransform: 'uppercase', fontStyle: 'italic' }}>Кружева</div>
-
-        <a href={TG} target="_blank" rel="noopener noreferrer"
-          style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '10px 22px', background: `linear-gradient(135deg,${G},#9a7228)`, color: BG, fontSize: 11, fontWeight: 500, letterSpacing: '2px', textDecoration: 'none', fontFamily: B, textTransform: 'uppercase', transition: 'opacity .3s' }}
-          onMouseEnter={e => e.currentTarget.style.opacity = '0.85'}
-          onMouseLeave={e => e.currentTarget.style.opacity = '1'}
-        >
-          <Sparkles size={13} strokeWidth={1.6}/>Записаться
-        </a>
       </div>
 
       {/* Hero */}
-      <div style={{ textAlign: 'center', padding: '72px 28px 56px' }}>
+      <div style={{ textAlign: 'center', padding: '48px 28px 56px' }}>
         <div style={{ display: 'inline-flex', alignItems: 'center', gap: 14, marginBottom: 18 }}>
           <div style={{ width: 32, height: 1, background: G }}/>
           <span style={{ color: G, fontSize: 10, fontWeight: 500, letterSpacing: '6px', textTransform: 'uppercase', fontFamily: B }}>Авторские работы</span>
