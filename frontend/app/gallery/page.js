@@ -171,7 +171,7 @@ function PhotoCell({ src, onOpen, index, total }) {
       style={{
         gridColumn: spanTwo ? 'span 2' : 'span 1',
         position: 'relative',
-        paddingBottom: '133%',
+        paddingBottom: spanTwo ? '66.5%' : '133%',
         cursor: 'pointer',
         overflow: 'hidden',
         border: `1px solid ${h ? BDR2 : BDR}`,
