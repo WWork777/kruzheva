@@ -1,6 +1,17 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
+
+function useIsMobile() {
+  const [m, setM] = useState(false)
+  useEffect(() => {
+    const check = () => setM(window.innerWidth < 768)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
+  return m
+}
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 import { ChevronLeft, ChevronRight, X, Sparkles } from 'lucide-react'
@@ -118,6 +129,7 @@ function Lightbox({ item, photoIdx, onClose, onPrev, onNext }) {
 
 function ItemSection({ item, index }) {
   const [lightbox, setLightbox] = useState(null)
+  const mobile = useIsMobile()
   const num = String(index + 1).padStart(2, '0')
 
   const openPhoto = (i) => setLightbox(i)
@@ -143,7 +155,7 @@ function ItemSection({ item, index }) {
       </div>
 
       {/* Photo grid */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, 260px)', gap: 8 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: mobile ? 'repeat(2, 1fr)' : 'repeat(4, 1fr)', gap: 8 }}>
         {item.photos.map((photo, i) => (
           <PhotoCell key={i} src={`/items/${item.id}/${photo}`} index={i} total={item.photos.length} onOpen={() => openPhoto(i)} />
         ))}
