@@ -1768,15 +1768,125 @@ function PriceRow({ name, price, note }) {
   )
 }
 
-const PRICES = [
-  { name: 'Платья',             price: 'от 7 000 ₽',  note: 'Повседневные, коктейльные, вечерние, свадебные' },
-  { name: 'Жакет в стиле Шанель', price: 'от 28 000 ₽', note: 'Кутюрный способ пошива, единственная в Кемерово' },
-  { name: 'Деловые жакеты',      price: 'от 14 000 ₽', note: 'Жакет, брюки, юбка — женский костюм' },
-  { name: 'Блузки и рубашки',    price: 'от 7 000 ₽',  note: 'По индивидуальным меркам' },
-  { name: 'Шубы и кожа',         price: 'по запросу',  note: 'Натуральный мех, кожа, реставрация' },
-  { name: 'Подгонка и ремонт',  price: 'от 4 000 ₽',  note: 'Зависит от сложности' },
-  { name: 'Консультация',       price: 'Бесплатно',   note: 'Первый визит без обязательств' },
+const PRICE_CATEGORIES = [
+  { cat: 'Блузки, рубашки, топы', items: [
+    { name: 'Блуза',   price: 'от 12 000 ₽' },
+    { name: 'Рубашка', price: 'от 8 500 ₽' },
+    { name: 'Топ',     price: 'от 6 000 ₽' },
+  ]},
+  { cat: 'Юбки', items: [
+    { name: 'Юбка без подкладки',              price: 'от 6 000 ₽' },
+    { name: 'Юбка с подкладкой',               price: 'от 7 500 ₽' },
+    { name: 'Юбка из натуральной кожи',        price: 'от 18 000 ₽' },
+    { name: 'Юбка в стиле «Шанель» бесклеевым способом', price: 'от 15 000 ₽' },
+  ]},
+  { cat: 'Брюки', items: [
+    { name: 'Брюки без подкладки',      price: 'от 8 500 ₽' },
+    { name: 'Брюки с подкладкой',       price: 'от 10 000 ₽' },
+    { name: 'Брюки из натуральной кожи', price: 'от 28 000 ₽' },
+    { name: 'Брюки из футера',          price: 'от 5 000 ₽' },
+  ]},
+  { cat: 'Платья', items: [
+    { name: 'Платье без подкладки', price: 'от 11 000 ₽' },
+    { name: 'Платье на подкладке',  price: 'от 18 000 ₽' },
+  ]},
+  { cat: 'Жакеты', items: [
+    { name: 'Жакет без подкладки',                        price: 'от 18 000 ₽' },
+    { name: 'Жакет на подкладке',                         price: 'от 20 000 ₽' },
+    { name: 'Жакет из натуральной кожи',                  price: 'от 38 000 ₽' },
+    { name: 'Жакет в стиле «Шанель» бесклеевым способом', price: 'от 25 000 ₽' },
+  ]},
+  { cat: 'Куртки', items: [
+    { name: 'Куртка-ветровка на подкладке', price: 'от 19 000 ₽' },
+    { name: 'Куртка из джинсовой ткани',   price: 'от 16 000 ₽' },
+    { name: 'Куртка из натуральной кожи',  price: 'от 35 000 ₽' },
+    { name: 'Куртка типа «Бомбер»',        price: 'от 12 000 ₽' },
+  ]},
+  { cat: 'Верхняя одежда', items: [
+    { name: 'Тренч',                                              price: 'от 20 000 ₽' },
+    { name: 'Тренч укороченный',                                  price: 'от 18 000 ₽' },
+    { name: 'Пальто без утеплителя',                              price: 'от 24 000 ₽' },
+    { name: 'Пальто с утеплителем',                               price: 'от 30 000 ₽' },
+    { name: 'Пальто с утеплителем и воротником из натурального меха', price: 'от 42 000 ₽' },
+    { name: 'Пальто из курточной ткани стёганое с утеплителем',   price: 'от 20 000 ₽' },
+  ]},
+  { cat: 'Меха и кожа', items: [
+    { name: 'Шуба из натурального меха', price: 'от 70 000 ₽' },
+    { name: 'Жилет из натурального меха', price: 'от 35 000 ₽' },
+  ]},
+  { cat: 'Трикотаж и повседневное', items: [
+    { name: 'Свитшот из футера',         price: 'от 5 000 ₽' },
+    { name: 'Шорты без подкладки',       price: 'от 6 500 ₽' },
+    { name: 'Шорты с подкладкой',        price: 'от 7 000 ₽' },
+    { name: 'Комбинезон без подкладки',  price: 'от 18 000 ₽' },
+    { name: 'Комбинезон на подкладке с утеплителем', price: 'от 27 000 ₽' },
+    { name: 'Футболка из кулирки',       price: 'от 3 000 ₽' },
+    { name: 'Лонгслив',                  price: 'от 3 500 ₽' },
+    { name: 'Жилет без подкладки',       price: 'от 7 800 ₽' },
+  ]},
+  { cat: 'Услуги', items: [
+    { name: 'Удорожание при сложности модели',                           price: 'от 20% от стоимости' },
+    { name: 'Консультация с выездом за тканью и фурнитурой (1 час)',     price: '1 500 ₽' },
+    { name: 'Первичная консультация в ателье',                           price: 'Бесплатно' },
+  ]},
 ]
+
+function PriceAccordion() {
+  const [open, setOpen] = useState(null)
+  return (
+    <div>
+      {PRICE_CATEGORIES.map((cat, ci) => {
+        const isOpen = open === ci
+        return (
+          <div key={ci} style={{ borderBottom: `1px solid ${BDR}` }}>
+            <button
+              onClick={() => setOpen(isOpen ? null : ci)}
+              style={{
+                width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                padding: '16px 12px', background: 'none', border: 'none', cursor: 'pointer',
+                transition: 'background .2s', borderRadius: 2,
+                ...(isOpen ? { background: 'rgba(201,168,76,.06)' } : {}),
+              }}
+            >
+              <span style={{ color: isOpen ? W : 'rgba(245,240,232,.88)', fontSize: 16, fontFamily: D, letterSpacing: '0.5px', fontWeight: 400, transition: 'color .2s', textAlign: 'left' }}>
+                {cat.cat}
+              </span>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexShrink: 0 }}>
+                <span style={{ color: MUT, fontSize: 11, fontFamily: B, fontWeight: 300 }}>{cat.items.length} позиций</span>
+                <motion.div animate={{ rotate: isOpen ? 45 : 0 }} transition={{ duration: 0.25 }} style={{ color: G, lineHeight: 1, fontSize: 20, fontWeight: 300 }}>+</motion.div>
+              </div>
+            </button>
+            <AnimatePresence initial={false}>
+              {isOpen && (
+                <motion.div
+                  key="content"
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: 'auto', opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.3, ease: [0.16, 0.84, 0.44, 1] }}
+                  style={{ overflow: 'hidden' }}
+                >
+                  <div style={{ paddingBottom: 8 }}>
+                    {cat.items.map((item, ii) => (
+                      <div key={ii} style={{ display: 'flex', alignItems: 'baseline', padding: '10px 12px', borderTop: `1px solid rgba(201,168,76,.07)` }}>
+                        <span style={{ flex: 1, color: 'rgba(245,240,232,.7)', fontSize: 14, fontFamily: B, fontWeight: 300 }}>{item.name}</span>
+                        <div style={{ borderBottom: `1px dotted rgba(201,168,76,.2)`, flex: '0 1 40px', marginBottom: 4, marginLeft: 12, marginRight: 12, alignSelf: 'flex-end' }} />
+                        <span style={{ color: G, fontSize: 14, fontFamily: D, fontWeight: 500, whiteSpace: 'nowrap', flexShrink: 0, fontStyle: 'italic' }}>{item.price}</span>
+                      </div>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        )
+      })}
+      <p style={{ color: MUT, fontSize: 12, marginTop: 20, letterSpacing: '0.5px', fontFamily: B, fontWeight: 300 }}>
+        * Ткани можно принести свои или выбрать из нашего каталога
+      </p>
+    </div>
+  )
+}
 
 function PricingSection() {
   return (
@@ -1796,23 +1906,9 @@ function PricingSection() {
         </Reveal>
 
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 64, alignItems: 'flex-start' }}>
-          <motion.div
-            style={{ flex: '1 1 380px', minWidth: 280 }}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-60px' }}
-            variants={{ visible: { transition: { staggerChildren: 0.07 } } }}
-          >
-            {PRICES.map((p, i) => (
-              <PriceRow key={i} {...p} />
-            ))}
-            <motion.p
-              variants={{ hidden: { opacity: 0 }, visible: { opacity: 1, transition: { duration: 0.5, delay: 0.1 } } }}
-              style={{ color: MUT, fontSize: 12, marginTop: 24, letterSpacing: '0.5px', fontFamily: B, fontWeight: 300 }}
-            >
-              * Ткани можно принести свои или выбрать из нашего каталога
-            </motion.p>
-          </motion.div>
+          <div style={{ flex: '1 1 380px', minWidth: 280 }}>
+            <PriceAccordion />
+          </div>
 
           <Reveal delay={200} style={{ flex: '1 1 280px', minWidth: 240 }}>
             <div style={{ background: BG, border: `1px solid ${G}`, padding: '48px 38px', position: 'relative', overflow: 'hidden' }}>
