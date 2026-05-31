@@ -438,7 +438,7 @@ function Navbar({ scrolled, open, setOpen }) {
   const links = [
     ['services', 'Услуги'],
     ['process', 'Процесс'],
-    ['gallery', 'Галерея'],
+    ['/gallery', 'Галерея', true],
     ['reviews', 'Отзывы'],
     ['contacts', 'Контакты'],
   ]
@@ -461,7 +461,10 @@ function Navbar({ scrolled, open, setOpen }) {
           <div style={{ color: MUT, fontSize: 8, letterSpacing: '4px', textTransform: 'uppercase', marginTop: 4, fontFamily: B }}>студия индивидуального пошива</div>
         </a>
         <div className="hidden md:flex" style={{ gap: 38, alignItems: 'center' }}>
-          {links.map(([id, label]) => <NavLink key={id} href={`#${id}`} scrolled={scrolled}>{label}</NavLink>)}
+          {links.map(([id, label, isPage]) => isPage
+            ? <a key={id} href={id} style={{ color: scrolled ? W : WL, fontSize: 13, fontFamily: B, letterSpacing: '2px', textTransform: 'uppercase', textDecoration: 'none', fontWeight: 400, transition: 'color .3s' }} onMouseEnter={e => e.currentTarget.style.color = G} onMouseLeave={e => e.currentTarget.style.color = scrolled ? W : WL}>{label}</a>
+            : <NavLink key={id} href={`#${id}`} scrolled={scrolled}>{label}</NavLink>
+          )}
         </div>
         <div className="hidden md:flex" style={{ gap: 8 }}>
           <Btn href={PHONE_HREF} small icon={Phone} testId="nav-phone-btn">{PHONE}</Btn>
@@ -2246,8 +2249,9 @@ function Contacts() {
                 <a href={PHONE_HREF} data-testid="contact-phone-link" style={{ color: W, fontFamily: B, fontWeight: 300, textDecoration: 'none', fontSize: 18 }}>{PHONE}</a>
               </ContactRow>
               <ContactRow Icon={Clock} label="Работа">
-                <span style={{ color: W, fontFamily: B, fontWeight: 300 }}>Пн–Пт: 10:00–18:00</span><br />
-                <span style={{ color: MUT, fontSize: 14, fontFamily: B, fontWeight: 300 }}>Суббота: 10:00–16:00</span>
+                <span style={{ color: W, fontFamily: B, fontWeight: 300 }}>Вт–Пт: 10:00–18:00</span><br />
+                <span style={{ color: W, fontFamily: B, fontWeight: 300 }}>Суббота: 10:00–16:00</span><br />
+                <span style={{ color: MUT, fontSize: 14, fontFamily: B, fontWeight: 300 }}>Вс, Пн — выходные</span>
               </ContactRow>
               <ContactRow Icon={Mail} label="Email">
                 <a href="mailto:innkruzel@yandex.ru" data-testid="contact-email-link" style={{ color: W, fontFamily: B, fontWeight: 300, textDecoration: 'none' }}>innkruzel@yandex.ru</a>
