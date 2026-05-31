@@ -14,7 +14,7 @@ function useIsMobile() {
 }
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
-import { ChevronLeft, ChevronRight, X, Sparkles } from 'lucide-react'
+import { ChevronLeft, ChevronRight, X, Sparkles, Phone, Send } from 'lucide-react'
 
 const G   = '#c9a84c'
 const GL  = '#e8d080'
@@ -29,6 +29,86 @@ const B   = 'Inter, system-ui, sans-serif'
 
 const TG_MSG = 'Здравствуйте! Хочу записаться на индивидуальный пошив в ателье «Кружева». Подскажите, пожалуйста, с чего начать?'
 const TG = `https://t.me/to_palto_atelier?text=${encodeURIComponent(TG_MSG)}`
+const PHONE_HREF = 'tel:+79235672333'
+const PHONE = '+7 (923) 567-23-33'
+const MAX = 'https://max.ru/u/f9LHodD0cOKruzzMUm0r4kwLnOKfaMmEeqiHVQzELiGzTOJwd2SK8OGl_9o'
+
+function Btn({ href, children, small, outline, block, icon: Icon }) {
+  const [h, setH] = useState(false)
+  const pad = small ? '8px 18px' : '12px 30px'
+  const fs = small ? 10 : 11
+  const base = { display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 8, padding: pad, fontSize: fs, fontWeight: 500, letterSpacing: '2.5px', textDecoration: 'none', transition: 'all .3s', cursor: 'pointer', fontFamily: B, textTransform: 'uppercase', width: block ? '100%' : 'auto', flexShrink: 0 }
+  const style = outline
+    ? { ...base, border: `1px solid ${h ? G : BDR2}`, color: h ? '#fff' : W, background: h ? G : 'transparent' }
+    : { ...base, background: h ? `linear-gradient(135deg,${GL},${G})` : `linear-gradient(135deg,${G},#9a7228)`, color: BG, border: 'none' }
+  return <a href={href} target={href?.startsWith('http') ? '_blank' : undefined} rel="noopener noreferrer" style={style} onMouseEnter={() => setH(true)} onMouseLeave={() => setH(false)}>{Icon && <Icon size={14} strokeWidth={1.8}/>}{children}</a>
+}
+
+const NAV_LINKS = [
+  ['/#services', 'Услуги'],
+  ['/#process', 'Процесс'],
+  ['/gallery', 'Галерея'],
+  ['/#reviews', 'Отзывы'],
+  ['/#contacts', 'Контакты'],
+]
+
+function GalleryNavbar() {
+  const [open, setOpen] = useState(false)
+  return (
+    <nav style={{ position: 'sticky', top: 0, zIndex: 200, background: 'rgba(10,21,16,.96)', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)', borderBottom: `1px solid ${BDR}` }}>
+      <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 28px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: 76 }}>
+        {/* Logo */}
+        <a href="/" style={{ textDecoration: 'none', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <div style={{ color: G, fontSize: 28, fontWeight: 400, letterSpacing: '2px', fontFamily: "'Great Vibes', cursive", lineHeight: 1 }}>Кружева</div>
+          <div style={{ color: MUT, fontSize: 8, letterSpacing: '4px', textTransform: 'uppercase', marginTop: 4, fontFamily: B }}>студия индивидуального пошива</div>
+        </a>
+        {/* Desktop nav */}
+        <div className="hidden md:flex" style={{ gap: 38, alignItems: 'center' }}>
+          {NAV_LINKS.map(([href, label]) => (
+            <a key={href} href={href} style={{ color: href === '/gallery' ? G : W, fontSize: 11, fontFamily: B, letterSpacing: '2.8px', textTransform: 'uppercase', textDecoration: 'none', fontWeight: 500, transition: 'color .3s' }}
+              onMouseEnter={e => e.currentTarget.style.color = G}
+              onMouseLeave={e => e.currentTarget.style.color = href === '/gallery' ? G : W}
+            >{label}</a>
+          ))}
+        </div>
+        {/* Desktop buttons */}
+        <div className="hidden md:flex" style={{ gap: 8 }}>
+          <Btn href={PHONE_HREF} small>{PHONE}</Btn>
+          <Btn href={MAX} small outline icon={Send}>MAX</Btn>
+          <Btn href={TG} small outline icon={Send}>TG</Btn>
+        </div>
+        {/* Burger */}
+        <button onClick={() => setOpen(!open)} className="flex md:hidden"
+          style={{ background: 'none', border: `1px solid ${BDR}`, color: G, padding: '8px 13px', cursor: 'pointer', fontSize: 17, lineHeight: 1 }}
+        >{open ? '✕' : '☰'}</button>
+      </div>
+      {/* Mobile menu */}
+      <AnimatePresence>
+        {open && (
+          <motion.div key="menu" initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.35, ease: [0.16, 0.84, 0.44, 1] }}
+            style={{ overflow: 'hidden', background: 'rgba(10,21,16,.99)', borderTop: `1px solid ${BDR}` }}
+          >
+            <div style={{ padding: '28px 28px 36px', display: 'flex', flexDirection: 'column', gap: 22 }}>
+              {NAV_LINKS.map(([href, label], i) => (
+                <motion.a key={href} href={href} onClick={() => setOpen(false)}
+                  initial={{ opacity: 0, x: -24 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.06 + i * 0.07, duration: 0.4 }}
+                  style={{ color: href === '/gallery' ? G : W, fontSize: 18, letterSpacing: '3px', textDecoration: 'none', textTransform: 'uppercase', fontFamily: D, fontStyle: 'italic' }}
+                >{label}</motion.a>
+              ))}
+              <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.44, duration: 0.4 }}
+                style={{ marginTop: 8, display: 'flex', flexDirection: 'column', gap: 12 }}
+              >
+                <Btn href={MAX} block icon={Send}>Написать в MAX</Btn>
+                <Btn href={TG} block icon={Send}>Написать в Телеграм</Btn>
+                <Btn href={PHONE_HREF} outline block icon={Phone}>Позвонить</Btn>
+              </motion.div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </nav>
+  )
+}
 
 const WORKS = [
   { id: 'item_01', title: 'Жакет Шанель',              material: 'Твид, натуральный шёлк',                                                                             photos: ['photo_2026-05-31_19-44-52.jpg','photo_2026-05-31_19-44-53.jpg','photo_2026-05-31_19-44-54.jpg','photo_2026-05-31_19-44-54_2.jpg','photo_2026-05-31_19-44-55.jpg','photo_2026-05-31_19-44-55_2.jpg','photo_2026-05-31_19-45-56.jpg'] },
@@ -202,20 +282,7 @@ export default function GalleryPage() {
   return (
     <div style={{ background: BG, minHeight: '100vh', color: W, fontFamily: B, overflowX: 'hidden' }}>
 
-      {/* Sticky header */}
-      <div style={{ position: 'sticky', top: 0, zIndex: 200, background: 'rgba(10,21,16,.96)', backdropFilter: 'blur(16px)', borderBottom: `1px solid ${BDR}`, padding: '0 28px', height: 64, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <div style={{ color: G, fontSize: 20, fontWeight: 400, letterSpacing: '7px', fontFamily: D, textTransform: 'uppercase', fontStyle: 'italic' }}>Кружева</div>
-      </div>
-
-      {/* Back link */}
-      <div style={{ padding: '28px 28px 0' }}>
-        <Link href="/" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, color: MUT, textDecoration: 'none', fontSize: 11, fontFamily: B, letterSpacing: '2px', textTransform: 'uppercase', transition: 'color .3s' }}
-          onMouseEnter={e => e.currentTarget.style.color = G}
-          onMouseLeave={e => e.currentTarget.style.color = MUT}
-        >
-          <ChevronLeft size={14} strokeWidth={1.6}/> На главную
-        </Link>
-      </div>
+      <GalleryNavbar />
 
       {/* Hero */}
       <div style={{ textAlign: 'center', padding: '48px 28px 56px' }}>
