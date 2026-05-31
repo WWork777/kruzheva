@@ -1852,7 +1852,7 @@ function PriceAccordion() {
                 {cat.cat}
               </span>
               <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexShrink: 0 }}>
-                <span style={{ color: MUT, fontSize: 11, fontFamily: B, fontWeight: 300 }}>{cat.items.length} позиций</span>
+                <span style={{ color: MUT, fontSize: 11, fontFamily: B, fontWeight: 300 }}>{cat.items.length} {((n) => { const m10=n%10,m100=n%100; if(m100>=11&&m100<=14)return'позиций'; if(m10===1)return'позиция'; if(m10>=2&&m10<=4)return'позиции'; return'позиций'; })(cat.items.length)}</span>
                 <motion.div animate={{ rotate: isOpen ? 45 : 0 }} transition={{ duration: 0.25 }} style={{ color: G, lineHeight: 1, fontSize: 20, fontWeight: 300 }}>+</motion.div>
               </div>
             </button>
@@ -1871,7 +1871,7 @@ function PriceAccordion() {
                       <div key={ii} style={{ display: 'flex', alignItems: 'baseline', padding: '10px 12px', borderTop: `1px solid rgba(201,168,76,.07)` }}>
                         <span style={{ flex: 1, color: 'rgba(245,240,232,.7)', fontSize: 14, fontFamily: B, fontWeight: 300 }}>{item.name}</span>
                         <div style={{ borderBottom: `1px dotted rgba(201,168,76,.2)`, flex: '0 1 40px', marginBottom: 4, marginLeft: 12, marginRight: 12, alignSelf: 'flex-end' }} />
-                        <span style={{ color: G, fontSize: 14, fontFamily: D, fontWeight: 500, whiteSpace: 'nowrap', flexShrink: 0, fontStyle: 'italic' }}>{item.price}</span>
+                        <span style={{ color: G, fontSize: 17, fontFamily: D, fontWeight: 500, whiteSpace: 'nowrap', flexShrink: 0, fontStyle: 'italic' }}>{item.price}</span>
                       </div>
                     ))}
                   </div>
