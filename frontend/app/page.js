@@ -18,6 +18,7 @@ import {
   ChevronLeft,
   ChevronRight,
   ChevronRight as ArrowRight,
+  X,
   Gem,
   Award,
   Heart,
