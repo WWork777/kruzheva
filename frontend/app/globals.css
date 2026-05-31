@@ -1,0 +1,125 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #0a1510;
+  color: #f5f0e8;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: rgba(201, 168, 76, 0.35);
+  color: #f5f0e8;
+}
+
+/* Gold-tinted scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #0a1510;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(201, 168, 76, 0.35);
+  border: 2px solid #0a1510;
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(201, 168, 76, 0.6);
+}
+
+/* Ken Burns slow zoom for hero */
+@keyframes kenburns {
+  0%   { transform: scale(1)    translate(0,    0)    }
+  50%  { transform: scale(1.08) translate(-1%, -1.5%) }
+  100% { transform: scale(1.12) translate(1%,  1%)    }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+
+@keyframes shimmer {
+  0%, 100% { opacity: 0.7; }
+  50%      { opacity: 1;   }
+}
+
+.hidden { display: none; }
+.md\:flex { display: flex; }
+
+@media (max-width: 768px) {
+  /* On mobile: hide desktop-only elements, show mobile-only elements */
+  .md\:flex { display: none !important; }
+  .md\:hidden { display: flex !important; }
+}
+
+@media (min-width: 769px) {
+  /* On desktop: hide mobile-only elements */
+  .md\:hidden { display: none !important; }
+}
+
+/* ---- Shimmer button ---- */
+@keyframes shimmer-slide {
+  from { transform: translateX(-100%) skewX(-12deg); }
+  to   { transform: translateX(300%) skewX(-12deg); }
+}
+.shimmer-btn::after {
+  content: '';
+  position: absolute;
+  top: -20%; left: 0;
+  width: 40%; height: 140%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+  animation: shimmer-slide 2.4s ease-in-out infinite;
+  animation-delay: 0.5s;
+}
+
+/* ---- Sparkle ---- */
+@keyframes sparkle-fade {
+  0%, 100% { opacity: 0; transform: scale(0) rotate(0deg); }
+  50%       { opacity: 1; transform: scale(1) rotate(180deg); }
+}
+
+/* ---- Aurora CTA ---- */
+@keyframes aurora-shift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.aurora-bg {
+  background: linear-gradient(-45deg, #0a1510, #1a3222, #0f2018, #0a1510, #1e3a28, #0a1510);
+  background-size: 400% 400%;
+  animation: aurora-shift 12s ease infinite;
+}
+
+/* ---- Glow card ---- */
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(201,168,76,0); }
+  50%       { box-shadow: 0 0 40px rgba(201,168,76,0.2), 0 0 80px rgba(201,168,76,0.08); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
