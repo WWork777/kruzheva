@@ -173,7 +173,7 @@ function ItemSection({ item, index }) {
 function PhotoCell({ src, onOpen, index, total }) {
   const [h, setH] = useState(false)
   // Первое фото занимает 2 колонки если фото > 4 и cols = 4
-  const spanTwo = total >= 5 && index === 0
+  const spanTwo = false
 
   return (
     <div
