@@ -55,7 +55,7 @@ const NAV_LINKS = [
 function GalleryNavbar() {
   const [open, setOpen] = useState(false)
   return (
-    <nav style={{ position: 'sticky', top: 0, zIndex: 200, background: 'rgba(10,21,16,.96)', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)', borderBottom: `1px solid ${BDR}` }}>
+    <nav style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 200, background: 'rgba(10,21,16,.96)', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)', borderBottom: `1px solid ${BDR}` }}>
       <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 28px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: 76 }}>
         {/* Logo */}
         <a href="/" style={{ textDecoration: 'none', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -280,7 +280,7 @@ function PhotoCell({ src, onOpen, index, total }) {
 
 export default function GalleryPage() {
   return (
-    <div style={{ background: BG, minHeight: '100vh', color: W, fontFamily: B, overflowX: 'hidden' }}>
+    <div style={{ background: BG, minHeight: '100vh', color: W, fontFamily: B, overflowX: 'hidden', paddingTop: 76 }}>
 
       <GalleryNavbar />
 
