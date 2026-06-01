@@ -105,36 +105,38 @@ function GalleryNavbar() {
   )
 }
 
+const CATS = ['Все', 'Жакеты', 'Верхняя одежда', 'Платья', 'Рубашки и блузы', 'Брюки', 'Костюмы', 'Меха и кожа']
+
 const WORKS = [
-  { id: 'item_01', title: 'Жакет Шанель',              material: 'Твид, натуральный шёлк',                                                                             photos: ['photo_2026-05-31_19-44-52.jpg','photo_2026-05-31_19-44-53.jpg','photo_2026-05-31_19-44-54.jpg','photo_2026-05-31_19-44-54_2.jpg','photo_2026-05-31_19-44-55.jpg','photo_2026-05-31_19-44-55_2.jpg','photo_2026-05-31_19-45-56.jpg'] },
-  { id: 'item_02', title: 'Бомбер',                     material: 'Твид, подкладка — вискоза 100%',                                                                     photos: ['photo_2026-05-31_19-47-05.jpg','photo_2026-05-31_19-47-06.jpg','photo_2026-05-31_19-47-08.jpg','photo_2026-05-31_19-47-09.jpg','photo_2026-05-31_19-47-10.jpg'] },
-  { id: 'item_03', title: 'Жакет',                      material: 'Твид, натуральный шёлк',                                                                             photos: ['photo_2026-05-30_20-43-52.jpg','photo_2026-05-30_20-44-59.jpg','photo_2026-05-31_19-48-26.jpg','photo_2026-05-31_19-48-27.jpg','photo_2026-05-31_19-48-35.jpg','photo_2026-05-31_19-48-43.jpg'] },
-  { id: 'item_04', title: 'Жакет',                      material: 'Твид, натуральный шёлк',                                                                             photos: ['photo_2026-05-31_19-50-50.jpg','photo_2026-05-31_19-50-52.jpg','photo_2026-05-31_19-50-53.jpg','photo_2026-05-31_19-50-56.jpg','photo_2026-05-31_19-50-56_2.jpg','photo_2026-05-31_19-50-58.jpg'] },
-  { id: 'item_05', title: 'Тренч',                      material: 'Костюмная ткань двусторонняя (Италия), подкладка — вискоза 100%',                                    photos: ['photo_2026-04-20_16-24-12.jpg','photo_2026-04-20_16-24-21.jpg','photo_2026-05-30_20-45-01.jpg','photo_2026-05-31_19-55-12.jpg','photo_2026-05-31_19-55-15.jpg','photo_2026-05-31_19-55-18.jpg'] },
-  { id: 'item_06', title: 'Укороченный тренч',          material: 'Ткань Рип-стоп, хлопок (Италия)',                                                                    photos: ['photo_2026-05-31_19-59-36.jpg','photo_2026-05-31_19-59-37.jpg','photo_2026-05-31_19-59-38.jpg','photo_2026-05-31_19-59-41.jpg','photo_2026-05-31_19-59-42.jpg'] },
-  { id: 'item_07', title: 'Рубашка',                    material: 'Хлопок',                                                                                             photos: ['photo_2026-05-31_20-01-07.jpg','photo_2026-05-31_20-01-11.jpg','photo_2026-05-31_20-01-13.jpg'] },
-  { id: 'item_08', title: 'Рубашка',                    material: 'Хлопок (Португалия)',                                                                                photos: ['photo_2026-05-30_20-57-48.jpg','photo_2026-05-30_20-59-03.jpg','photo_2026-05-30_20-59-04.jpg','photo_2026-05-31_20-04-12.jpg','photo_2026-05-31_20-04-14.jpg','photo_2026-05-31_20-04-16.jpg'] },
-  { id: 'item_09', title: 'Блуза',                      material: 'Лён 100%',                                                                                           photos: ['photo_2026-05-31_20-07-48.jpg','photo_2026-05-31_20-07-49.jpg','photo_2026-05-31_20-07-52.jpg'] },
-  { id: 'item_10', title: 'Рубашка',                    material: 'Хлопок',                                                                                             photos: ['photo_2026-05-31_20-17-56.jpg','photo_2026-05-31_20-17-56_2.jpg'] },
-  { id: 'item_11', title: 'Блуза',                      material: 'Натуральный крепдешин',                                                                              photos: ['photo_2026-05-31_20-21-31.jpg','photo_2026-05-31_20-21-33.jpg','photo_2026-05-31_20-21-34.jpg','photo_2026-05-31_20-21-36.jpg'] },
-  { id: 'item_12', title: 'Куртка из меха',             material: 'Стриженный бобёр, норка, натуральная замша',                                                         photos: ['photo_2026-05-30_20-53-55.jpg','photo_2026-05-31_20-24-17.jpg','photo_2026-05-31_20-24-19.jpg'] },
-  { id: 'item_13', title: 'Опушка на воротник',         material: 'Мех енота',                                                                                          photos: ['photo_2026-01-14_13-16-34.jpg','photo_2026-05-31_20-25-42.jpg'] },
-  { id: 'item_14', title: 'Утеплённый комбинезон',      material: 'Плащевая ткань, вискоза, утеплитель альпалюкс, опушка из меха рыжей лисы «огнёвка»',                photos: ['photo_2026-02-18_11-15-21.jpg','photo_2026-02-18_11-15-26.jpg','photo_2026-02-18_11-15-32.jpg','photo_2026-05-31_20-28-50.jpg','photo_2026-05-31_20-29-01.jpg','photo_2026-05-31_20-29-05.jpg','photo_2026-05-31_20-29-08.jpg','photo_2026-05-31_20-29-11.jpg'] },
-  { id: 'item_15', title: 'Шубка укороченная',          material: 'Мех норки «Вельвет» цвет Браун, подкладка вискоза 100%',                                            photos: ['photo_2025-12-02_09-31-38.jpg','photo_2026-05-31_20-31-15.jpg','photo_2026-05-31_20-31-16.jpg'] },
-  { id: 'item_16', title: 'Пальто утеплённое',          material: 'Пальтовая ткань (Италия), вискоза, утеплитель из шерстипона, воротник из меха норки (Норвегия)',     photos: ['photo_2026-05-31_20-36-01.jpg','photo_2026-05-31_20-36-01_2.jpg','photo_2026-05-31_20-36-02.jpg','photo_2026-05-31_20-36-02_2.jpg'] },
-  { id: 'item_17', title: 'Плащ-пыльник',               material: 'Хлопок-сатин, подкладка вискозный батист',                                                          photos: ['photo_2026-05-31_20-41-41.jpg','photo_2026-05-31_20-41-43.jpg','photo_2026-05-31_20-41-44.jpg','photo_2026-05-31_20-41-45.jpg','photo_2026-05-31_20-41-46.jpg','photo_2026-05-31_20-41-46_2.jpg','photo_2026-05-31_20-41-48.jpg','photo_2026-05-31_20-41-49.jpg'] },
-  { id: 'item_18', title: 'Бомбер',                     material: 'Мягкая пальтовая ткань (Италия), подкладка вискоза 100%',                                           photos: ['photo_2026-05-31_20-44-37.jpg','photo_2026-05-31_20-44-39.jpg','photo_2026-05-31_20-44-40.jpg','photo_2026-05-31_20-44-41.jpg','photo_2026-05-31_20-44-53.jpg'] },
-  { id: 'item_19', title: 'Кроп-тренч',                 material: 'Тренчевая ткань хлопок (Италия), подкладка из вискозы и хлопка',                                    photos: ['photo_2026-05-31_20-48-34.jpg','photo_2026-05-31_20-48-36.jpg','photo_2026-05-31_20-48-36_2.jpg','photo_2026-05-31_20-48-36_3.jpg','photo_2026-05-31_20-48-39.jpg','photo_2026-05-31_20-48-40.jpg','photo_2026-05-31_20-48-41.jpg','photo_2026-05-31_20-48-44.jpg'] },
-  { id: 'item_20', title: 'Куртка из натуральной кожи', material: 'Расписана вручную акрилом',                                                                          photos: ['photo_2026-05-31_20-51-54.jpg','photo_2026-05-31_20-51-55.jpg','photo_2026-05-31_20-51-56.jpg','photo_2026-05-31_20-51-57.jpg','photo_2026-05-31_20-52-00.jpg','photo_2026-05-31_20-52-01.jpg','photo_2026-05-31_20-52-03.jpg','photo_2026-05-31_20-52-04.jpg'] },
-  { id: 'item_21', title: 'Куртка комбинированная',     material: 'Курточная ткань, пальтовая ткань',                                                                   photos: ['photo_2026-05-31_20-55-00.jpg','photo_2026-05-31_20-55-08.jpg','photo_2026-05-31_20-55-29.jpg','photo_2026-05-31_20-55-38.jpg','photo_2026-05-31_20-56-09.jpg'] },
-  { id: 'item_22', title: 'Жилет и юбка на подкладке',  material: 'Костюмная ткань (Италия), подкладка вискоза 100%',                                                   photos: ['photo_2026-04-05_11-04-53.jpg','photo_2026-05-31_20-57-07.jpg','photo_2026-05-31_20-57-08.jpg','photo_2026-05-31_20-57-09.jpg','photo_2026-05-31_20-57-09_2.jpg','photo_2026-05-31_20-57-09_3.jpg'] },
-  { id: 'item_23', title: 'Брюки на подкладке',         material: '',                                                                                                    photos: ['photo_2025-11-16_11-59-17.jpg','photo_2026-05-31_21-01-59.jpg','photo_2026-05-31_21-02-00.jpg','photo_2026-05-31_21-02-01.jpg','photo_2026-05-31_21-02-03.jpg'] },
-  { id: 'item_24', title: 'Брюки из смесовой ткани',    material: '',                                                                                                    photos: ['photo_2026-05-31_21-03-15.jpg','photo_2026-05-31_21-03-17.jpg','photo_2026-05-31_21-03-18.jpg'] },
-  { id: 'item_25', title: 'Жакет из смесовой ткани',    material: 'Подкладка вискоза 100%, отделка из натурального шёлка',                                             photos: ['photo_2026-01-28_18-36-03.jpg','photo_2026-01-28_18-36-08.jpg','photo_2026-05-30_20-49-08.jpg','photo_2026-05-31_21-36-57.jpg','photo_2026-05-31_21-37-06.jpg','photo_2026-05-31_21-37-17.jpg'] },
-  { id: 'item_26', title: 'Костюм: жакет и юбка',       material: 'Смесовая ткань',                                                                                     photos: ['photo_2026-05-31_21-40-23.jpg','photo_2026-05-31_21-40-23_2.jpg','photo_2026-05-31_21-40-23_3.jpg','photo_2026-05-31_21-40-23_4.jpg','photo_2026-05-31_21-40-23_5.jpg','photo_2026-05-31_21-40-23_6.jpg','photo_2026-05-31_21-40-23_7.jpg','photo_2026-05-31_21-40-24.jpg','photo_2026-05-31_21-40-24_2.jpg'] },
-  { id: 'item_27', title: 'Платье из крепдешина',       material: 'Натуральный крепдешин, подкладка из вискозного батиста',                                            photos: ['photo_2025-07-24_20-12-51.jpg','photo_2026-05-31_21-43-26.jpg','photo_2026-05-31_21-43-28.jpg','photo_2026-05-31_21-43-33.jpg','photo_2026-05-31_21-43-36.jpg','photo_2026-05-31_21-43-38.jpg','photo_2026-05-31_21-43-39.jpg'] },
-  { id: 'item_28', title: 'Платье из крепдешина',       material: 'Натуральный крепдешин, подкладка из натурального шёлка',                                            photos: ['photo_2026-01-28_18-36-42.jpg','photo_2026-01-28_18-36-56.jpg','photo_2026-05-31_21-45-36.jpg','photo_2026-05-31_21-45-40.jpg'] },
-  { id: 'item_29', title: 'Платье из льна',             material: 'Лён 100%, отделка из кружева 100% хлопок',                                                          photos: ['photo_2026-05-31_21-49-02.jpg','photo_2026-05-31_21-49-02_2.jpg','photo_2026-05-31_21-49-02_3.jpg','photo_2026-05-31_21-49-02_4.jpg','photo_2026-05-31_21-49-02_5.jpg','photo_2026-05-31_21-49-02_6.jpg','photo_2026-05-31_21-49-02_7.jpg','photo_2026-05-31_21-49-02_8.jpg','photo_2026-05-31_21-49-02_9.jpg'] },
+  { id: 'item_01', cat: 'Жакеты',         title: 'Жакет Шанель',              material: 'Твид, натуральный шёлк',                                                                             photos: ['photo_2026-05-31_19-44-52.jpg','photo_2026-05-31_19-44-53.jpg','photo_2026-05-31_19-44-54.jpg','photo_2026-05-31_19-44-54_2.jpg','photo_2026-05-31_19-44-55.jpg','photo_2026-05-31_19-44-55_2.jpg','photo_2026-05-31_19-45-56.jpg'] },
+  { id: 'item_02', cat: 'Верхняя одежда', title: 'Бомбер',                     material: 'Твид, подкладка — вискоза 100%',                                                                     photos: ['photo_2026-05-31_19-47-05.jpg','photo_2026-05-31_19-47-06.jpg','photo_2026-05-31_19-47-08.jpg','photo_2026-05-31_19-47-09.jpg','photo_2026-05-31_19-47-10.jpg'] },
+  { id: 'item_03', cat: 'Жакеты',         title: 'Жакет',                      material: 'Твид, натуральный шёлк',                                                                             photos: ['photo_2026-05-30_20-43-52.jpg','photo_2026-05-30_20-44-59.jpg','photo_2026-05-31_19-48-26.jpg','photo_2026-05-31_19-48-27.jpg','photo_2026-05-31_19-48-35.jpg','photo_2026-05-31_19-48-43.jpg'] },
+  { id: 'item_04', cat: 'Жакеты',         title: 'Жакет',                      material: 'Твид, натуральный шёлк',                                                                             photos: ['photo_2026-05-31_19-50-50.jpg','photo_2026-05-31_19-50-52.jpg','photo_2026-05-31_19-50-53.jpg','photo_2026-05-31_19-50-56.jpg','photo_2026-05-31_19-50-56_2.jpg','photo_2026-05-31_19-50-58.jpg'] },
+  { id: 'item_05', cat: 'Верхняя одежда', title: 'Тренч',                      material: 'Костюмная ткань двусторонняя (Италия), подкладка — вискоза 100%',                                    photos: ['photo_2026-04-20_16-24-12.jpg','photo_2026-04-20_16-24-21.jpg','photo_2026-05-30_20-45-01.jpg','photo_2026-05-31_19-55-12.jpg','photo_2026-05-31_19-55-15.jpg','photo_2026-05-31_19-55-18.jpg'] },
+  { id: 'item_06', cat: 'Верхняя одежда', title: 'Укороченный тренч',          material: 'Ткань Рип-стоп, хлопок (Италия)',                                                                    photos: ['photo_2026-05-31_19-59-36.jpg','photo_2026-05-31_19-59-37.jpg','photo_2026-05-31_19-59-38.jpg','photo_2026-05-31_19-59-41.jpg','photo_2026-05-31_19-59-42.jpg'] },
+  { id: 'item_07', cat: 'Рубашки и блузы',title: 'Рубашка',                    material: 'Хлопок',                                                                                             photos: ['photo_2026-05-31_20-01-07.jpg','photo_2026-05-31_20-01-11.jpg','photo_2026-05-31_20-01-13.jpg'] },
+  { id: 'item_08', cat: 'Рубашки и блузы',title: 'Рубашка',                    material: 'Хлопок (Португалия)',                                                                                photos: ['photo_2026-05-30_20-57-48.jpg','photo_2026-05-30_20-59-03.jpg','photo_2026-05-30_20-59-04.jpg','photo_2026-05-31_20-04-12.jpg','photo_2026-05-31_20-04-14.jpg','photo_2026-05-31_20-04-16.jpg'] },
+  { id: 'item_09', cat: 'Рубашки и блузы',title: 'Блуза',                      material: 'Лён 100%',                                                                                           photos: ['photo_2026-05-31_20-07-48.jpg','photo_2026-05-31_20-07-49.jpg','photo_2026-05-31_20-07-52.jpg'] },
+  { id: 'item_10', cat: 'Рубашки и блузы',title: 'Рубашка',                    material: 'Хлопок',                                                                                             photos: ['photo_2026-05-31_20-17-56.jpg','photo_2026-05-31_20-17-56_2.jpg'] },
+  { id: 'item_11', cat: 'Рубашки и блузы',title: 'Блуза',                      material: 'Натуральный крепдешин',                                                                              photos: ['photo_2026-05-31_20-21-31.jpg','photo_2026-05-31_20-21-33.jpg','photo_2026-05-31_20-21-34.jpg','photo_2026-05-31_20-21-36.jpg'] },
+  { id: 'item_12', cat: 'Меха и кожа',    title: 'Куртка из меха',             material: 'Стриженный бобёр, норка, натуральная замша',                                                         photos: ['photo_2026-05-30_20-53-55.jpg','photo_2026-05-31_20-24-17.jpg','photo_2026-05-31_20-24-19.jpg'] },
+  { id: 'item_13', cat: 'Меха и кожа',    title: 'Опушка на воротник',         material: 'Мех енота',                                                                                          photos: ['photo_2026-01-14_13-16-34.jpg','photo_2026-05-31_20-25-42.jpg'] },
+  { id: 'item_14', cat: 'Верхняя одежда', title: 'Утеплённый комбинезон',      material: 'Плащевая ткань, вискоза, утеплитель альпалюкс, опушка из меха рыжей лисы «огнёвка»',                photos: ['photo_2026-02-18_11-15-21.jpg','photo_2026-02-18_11-15-26.jpg','photo_2026-02-18_11-15-32.jpg','photo_2026-05-31_20-28-50.jpg','photo_2026-05-31_20-29-01.jpg','photo_2026-05-31_20-29-05.jpg','photo_2026-05-31_20-29-08.jpg','photo_2026-05-31_20-29-11.jpg'] },
+  { id: 'item_15', cat: 'Меха и кожа',    title: 'Шубка укороченная',          material: 'Мех норки «Вельвет» цвет Браун, подкладка вискоза 100%',                                            photos: ['photo_2025-12-02_09-31-38.jpg','photo_2026-05-31_20-31-15.jpg','photo_2026-05-31_20-31-16.jpg'] },
+  { id: 'item_16', cat: 'Верхняя одежда', title: 'Пальто утеплённое',          material: 'Пальтовая ткань (Италия), вискоза, утеплитель из шерстипона, воротник из меха норки (Норвегия)',     photos: ['photo_2026-05-31_20-36-01.jpg','photo_2026-05-31_20-36-01_2.jpg','photo_2026-05-31_20-36-02.jpg','photo_2026-05-31_20-36-02_2.jpg'] },
+  { id: 'item_17', cat: 'Верхняя одежда', title: 'Плащ-пыльник',               material: 'Хлопок-сатин, подкладка вискозный батист',                                                          photos: ['photo_2026-05-31_20-41-41.jpg','photo_2026-05-31_20-41-43.jpg','photo_2026-05-31_20-41-44.jpg','photo_2026-05-31_20-41-45.jpg','photo_2026-05-31_20-41-46.jpg','photo_2026-05-31_20-41-46_2.jpg','photo_2026-05-31_20-41-48.jpg','photo_2026-05-31_20-41-49.jpg'] },
+  { id: 'item_18', cat: 'Верхняя одежда', title: 'Бомбер',                     material: 'Мягкая пальтовая ткань (Италия), подкладка вискоза 100%',                                           photos: ['photo_2026-05-31_20-44-37.jpg','photo_2026-05-31_20-44-39.jpg','photo_2026-05-31_20-44-40.jpg','photo_2026-05-31_20-44-41.jpg','photo_2026-05-31_20-44-53.jpg'] },
+  { id: 'item_19', cat: 'Верхняя одежда', title: 'Кроп-тренч',                 material: 'Тренчевая ткань хлопок (Италия), подкладка из вискозы и хлопка',                                    photos: ['photo_2026-05-31_20-48-34.jpg','photo_2026-05-31_20-48-36.jpg','photo_2026-05-31_20-48-36_2.jpg','photo_2026-05-31_20-48-36_3.jpg','photo_2026-05-31_20-48-39.jpg','photo_2026-05-31_20-48-40.jpg','photo_2026-05-31_20-48-41.jpg','photo_2026-05-31_20-48-44.jpg'] },
+  { id: 'item_20', cat: 'Меха и кожа',    title: 'Куртка из натуральной кожи', material: 'Расписана вручную акрилом',                                                                          photos: ['photo_2026-05-31_20-51-54.jpg','photo_2026-05-31_20-51-55.jpg','photo_2026-05-31_20-51-56.jpg','photo_2026-05-31_20-51-57.jpg','photo_2026-05-31_20-52-00.jpg','photo_2026-05-31_20-52-01.jpg','photo_2026-05-31_20-52-03.jpg','photo_2026-05-31_20-52-04.jpg'] },
+  { id: 'item_21', cat: 'Верхняя одежда', title: 'Куртка комбинированная',     material: 'Курточная ткань, пальтовая ткань',                                                                   photos: ['photo_2026-05-31_20-55-00.jpg','photo_2026-05-31_20-55-08.jpg','photo_2026-05-31_20-55-29.jpg','photo_2026-05-31_20-55-38.jpg','photo_2026-05-31_20-56-09.jpg'] },
+  { id: 'item_22', cat: 'Костюмы',        title: 'Жилет и юбка на подкладке',  material: 'Костюмная ткань (Италия), подкладка вискоза 100%',                                                   photos: ['photo_2026-04-05_11-04-53.jpg','photo_2026-05-31_20-57-07.jpg','photo_2026-05-31_20-57-08.jpg','photo_2026-05-31_20-57-09.jpg','photo_2026-05-31_20-57-09_2.jpg','photo_2026-05-31_20-57-09_3.jpg'] },
+  { id: 'item_23', cat: 'Брюки',          title: 'Брюки на подкладке',         material: '',                                                                                                    photos: ['photo_2025-11-16_11-59-17.jpg','photo_2026-05-31_21-01-59.jpg','photo_2026-05-31_21-02-00.jpg','photo_2026-05-31_21-02-01.jpg','photo_2026-05-31_21-02-03.jpg'] },
+  { id: 'item_24', cat: 'Брюки',          title: 'Брюки из смесовой ткани',    material: '',                                                                                                    photos: ['photo_2026-05-31_21-03-15.jpg','photo_2026-05-31_21-03-17.jpg','photo_2026-05-31_21-03-18.jpg'] },
+  { id: 'item_25', cat: 'Жакеты',         title: 'Жакет из смесовой ткани',    material: 'Подкладка вискоза 100%, отделка из натурального шёлка',                                             photos: ['photo_2026-01-28_18-36-03.jpg','photo_2026-01-28_18-36-08.jpg','photo_2026-05-30_20-49-08.jpg','photo_2026-05-31_21-36-57.jpg','photo_2026-05-31_21-37-06.jpg','photo_2026-05-31_21-37-17.jpg'] },
+  { id: 'item_26', cat: 'Костюмы',        title: 'Костюм: жакет и юбка',       material: 'Смесовая ткань',                                                                                     photos: ['photo_2026-05-31_21-40-23.jpg','photo_2026-05-31_21-40-23_2.jpg','photo_2026-05-31_21-40-23_3.jpg','photo_2026-05-31_21-40-23_4.jpg','photo_2026-05-31_21-40-23_5.jpg','photo_2026-05-31_21-40-23_6.jpg','photo_2026-05-31_21-40-23_7.jpg','photo_2026-05-31_21-40-24.jpg','photo_2026-05-31_21-40-24_2.jpg'] },
+  { id: 'item_27', cat: 'Платья',         title: 'Платье из крепдешина',       material: 'Натуральный крепдешин, подкладка из вискозного батиста',                                            photos: ['photo_2025-07-24_20-12-51.jpg','photo_2026-05-31_21-43-26.jpg','photo_2026-05-31_21-43-28.jpg','photo_2026-05-31_21-43-33.jpg','photo_2026-05-31_21-43-36.jpg','photo_2026-05-31_21-43-38.jpg','photo_2026-05-31_21-43-39.jpg'] },
+  { id: 'item_28', cat: 'Платья',         title: 'Платье из крепдешина',       material: 'Натуральный крепдешин, подкладка из натурального шёлка',                                            photos: ['photo_2026-01-28_18-36-42.jpg','photo_2026-01-28_18-36-56.jpg','photo_2026-05-31_21-45-36.jpg','photo_2026-05-31_21-45-40.jpg'] },
+  { id: 'item_29', cat: 'Платья',         title: 'Платье из льна',             material: 'Лён 100%, отделка из кружева 100% хлопок',                                                          photos: ['photo_2026-05-31_21-49-02.jpg','photo_2026-05-31_21-49-02_2.jpg','photo_2026-05-31_21-49-02_3.jpg','photo_2026-05-31_21-49-02_4.jpg','photo_2026-05-31_21-49-02_5.jpg','photo_2026-05-31_21-49-02_6.jpg','photo_2026-05-31_21-49-02_7.jpg','photo_2026-05-31_21-49-02_8.jpg','photo_2026-05-31_21-49-02_9.jpg'] },
 ]
 
 function Lightbox({ item, photoIdx, onClose, onPrev, onNext, onThumb }) {
@@ -255,19 +257,22 @@ function CatalogCard({ item, index, onOpen }) {
 
 export default function GalleryPage() {
   const mobile = useIsMobile()
-  const [lightbox, setLightbox] = useState(null) // { item, photoIdx }
+  const [lightbox, setLightbox] = useState(null)
+  const [activeCat, setActiveCat] = useState('Все')
 
   const openItem = (item) => setLightbox({ item, photoIdx: 0 })
   const prev = () => setLightbox(s => ({ ...s, photoIdx: s.photoIdx > 0 ? s.photoIdx - 1 : s.item.photos.length - 1 }))
   const next = () => setLightbox(s => ({ ...s, photoIdx: s.photoIdx < s.item.photos.length - 1 ? s.photoIdx + 1 : 0 }))
   const thumb = (i) => setLightbox(s => ({ ...s, photoIdx: i }))
 
+  const filtered = activeCat === 'Все' ? WORKS : WORKS.filter(w => w.cat === activeCat)
+
   return (
     <div style={{ background: BG, minHeight: '100vh', color: W, fontFamily: B, overflowX: 'hidden', paddingTop: 76 }}>
       <GalleryNavbar />
 
       {/* Hero */}
-      <div style={{ textAlign: 'center', padding: mobile ? '48px 20px 40px' : '64px 28px 48px', borderBottom: `1px solid ${BDR}` }}>
+      <div style={{ textAlign: 'center', padding: mobile ? '48px 20px 32px' : '64px 28px 40px', borderBottom: `1px solid ${BDR}` }}>
         <div style={{ display: 'inline-flex', alignItems: 'center', gap: 14, marginBottom: 16 }}>
           <div style={{ width: 28, height: 1, background: G }}/>
           <span style={{ color: G, fontSize: 10, fontWeight: 500, letterSpacing: '6px', textTransform: 'uppercase', fontFamily: B }}>Авторские работы</span>
@@ -281,13 +286,44 @@ export default function GalleryPage() {
         </p>
       </div>
 
-      {/* Catalog grid */}
-      <div style={{ maxWidth: 1280, margin: '0 auto', padding: mobile ? '32px 16px 80px' : '48px 28px 100px' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: mobile ? 'repeat(2, 1fr)' : 'repeat(4, 1fr)', gap: mobile ? 12 : 16 }}>
-          {WORKS.map((item, i) => (
-            <CatalogCard key={item.id} item={item} index={i} onOpen={() => openItem(item)} />
-          ))}
+      {/* Filters */}
+      <div style={{ borderBottom: `1px solid ${BDR}`, padding: mobile ? '16px 16px' : '20px 28px', overflowX: 'auto', scrollbarWidth: 'none' }}>
+        <div style={{ display: 'flex', gap: 8, minWidth: 'max-content', margin: '0 auto', maxWidth: 1280 }}>
+          {CATS.map(cat => {
+            const active = cat === activeCat
+            const count = cat === 'Все' ? WORKS.length : WORKS.filter(w => w.cat === cat).length
+            return (
+              <button key={cat} onClick={() => setActiveCat(cat)} style={{
+                padding: '8px 18px', border: `1px solid ${active ? G : BDR}`,
+                background: active ? 'rgba(201,168,76,.15)' : 'transparent',
+                color: active ? G : MUT, cursor: 'pointer',
+                fontSize: 11, fontFamily: B, fontWeight: active ? 500 : 300,
+                letterSpacing: '1.5px', textTransform: 'uppercase',
+                transition: 'all .2s', whiteSpace: 'nowrap',
+              }}
+                onMouseEnter={e => { if (!active) { e.currentTarget.style.borderColor = 'rgba(201,168,76,.4)'; e.currentTarget.style.color = W }}}
+                onMouseLeave={e => { if (!active) { e.currentTarget.style.borderColor = BDR; e.currentTarget.style.color = MUT }}}
+              >
+                {cat} <span style={{ opacity: 0.5, fontSize: 10 }}>({count})</span>
+              </button>
+            )
+          })}
         </div>
+      </div>
+
+      {/* Catalog grid */}
+      <div style={{ maxWidth: 1280, margin: '0 auto', padding: mobile ? '28px 16px 80px' : '40px 28px 100px' }}>
+        <AnimatePresence mode="wait">
+          <motion.div key={activeCat}
+            initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            style={{ display: 'grid', gridTemplateColumns: mobile ? 'repeat(2, 1fr)' : 'repeat(4, 1fr)', gap: mobile ? 12 : 16 }}
+          >
+            {filtered.map((item, i) => (
+              <CatalogCard key={item.id} item={item} index={i} onOpen={() => openItem(item)} />
+            ))}
+          </motion.div>
+        </AnimatePresence>
       </div>
 
       {/* CTA */}
