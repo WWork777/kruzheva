@@ -1337,54 +1337,41 @@ function WorksModal({ item, onClose }) {
 function WorksSection() {
   const [active, setActive] = useState(null)
   const mobile = useIsMobile()
-  const trackRef = useRef(null)
-
-  const scroll = dir => {
-    if (!trackRef.current) return
-    trackRef.current.scrollBy({ left: dir * 320, behavior: 'smooth' })
-  }
+  const featured = WORKS.slice(0, 7)
 
   return (
-    <section style={{ padding: mobile ? '72px 0' : '100px 0', background: '#0a1510', position: 'relative', overflow: 'hidden' }}>
+    <section style={{ padding: mobile ? '72px 20px' : '100px 28px', background: '#0a1510', position: 'relative', overflow: 'hidden' }}>
       <LaceBgPattern opacity={0.03}/>
       <div style={{ maxWidth: 1280, margin: '0 auto', position: 'relative' }}>
+
+        {/* Header row */}
         <Reveal>
-          <div style={{ textAlign: 'center', marginBottom: 52, padding: '0 28px' }}>
-            <SectionEye>Авторские работы</SectionEye>
-            <h2 style={{ fontSize: 'clamp(34px,4.3vw,58px)', fontFamily: 'Georgia,serif', color: '#f5f0e8', fontWeight: 300, letterSpacing: '-0.5px' }}>
-              Готовые <span style={{ color: '#c9a84c', fontStyle: 'italic' }}>изделия</span>
-            </h2>
-            <div style={{ marginTop: 28 }}>
-              <a href="/gallery" style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '12px 32px', border: `1px solid rgba(201,168,76,.5)`, color: '#c9a84c', textDecoration: 'none', fontSize: 12, fontFamily: 'Inter,sans-serif', fontWeight: 500, letterSpacing: '3px', textTransform: 'uppercase', transition: 'background .25s, border-color .25s' }}
-                onMouseEnter={e => { e.currentTarget.style.background = 'rgba(201,168,76,.1)'; e.currentTarget.style.borderColor = '#c9a84c' }}
-                onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.borderColor = 'rgba(201,168,76,.5)' }}
-              >
-                Смотреть все <ChevronRight size={14} strokeWidth={1.8}/>
-              </a>
+          <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', marginBottom: 36, flexWrap: 'wrap', gap: 16 }}>
+            <div>
+              <SectionEye>Авторские работы</SectionEye>
+              <h2 style={{ fontSize: 'clamp(34px,4.3vw,58px)', fontFamily: D, color: W, fontWeight: 300, letterSpacing: '-0.5px', margin: 0 }}>
+                Готовые <span style={{ color: G, fontStyle: 'italic' }}>изделия</span>
+              </h2>
             </div>
+            <a href="/gallery" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, color: G, textDecoration: 'none', fontSize: 11, fontFamily: B, fontWeight: 500, letterSpacing: '2.5px', textTransform: 'uppercase', borderBottom: `1px solid rgba(201,168,76,.3)`, paddingBottom: 2, transition: 'border-color .3s' }}
+              onMouseEnter={e => e.currentTarget.style.borderColor = G}
+              onMouseLeave={e => e.currentTarget.style.borderColor = 'rgba(201,168,76,.3)'}
+            >
+              Смотреть все <ChevronRight size={13} strokeWidth={2}/>
+            </a>
           </div>
         </Reveal>
 
-        {/* Track + arrows wrapper */}
-        <div style={{ position: 'relative' }}>
-          {!mobile && (
-            <>
-              <button onClick={() => scroll(-1)} style={{ position: 'absolute', left: -22, top: '50%', transform: 'translateY(-50%)', zIndex: 10, background: 'rgba(201,168,76,.18)', border: `1px solid rgba(201,168,76,.5)`, color: '#c9a84c', cursor: 'pointer', width: 44, height: 44, display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'background .2s, border-color .2s' }}
-                onMouseEnter={e => { e.currentTarget.style.background = 'rgba(201,168,76,.45)'; e.currentTarget.style.borderColor = '#c9a84c' }}
-                onMouseLeave={e => { e.currentTarget.style.background = 'rgba(201,168,76,.18)'; e.currentTarget.style.borderColor = 'rgba(201,168,76,.5)' }}
-              ><ChevronLeft size={20} strokeWidth={1.8}/></button>
-              <button onClick={() => scroll(1)} style={{ position: 'absolute', right: -22, top: '50%', transform: 'translateY(-50%)', zIndex: 10, background: 'rgba(201,168,76,.18)', border: `1px solid rgba(201,168,76,.5)`, color: '#c9a84c', cursor: 'pointer', width: 44, height: 44, display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'background .2s, border-color .2s' }}
-                onMouseEnter={e => { e.currentTarget.style.background = 'rgba(201,168,76,.45)'; e.currentTarget.style.borderColor = '#c9a84c' }}
-                onMouseLeave={e => { e.currentTarget.style.background = 'rgba(201,168,76,.18)'; e.currentTarget.style.borderColor = 'rgba(201,168,76,.5)' }}
-              ><ChevronRight size={20} strokeWidth={1.8}/></button>
-            </>
-          )}
-          <div ref={trackRef} style={{ display: 'flex', gap: 16, overflowX: 'auto', padding: mobile ? '8px 20px 24px' : '8px 28px 24px', scrollSnapType: 'x mandatory', scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-            {WORKS.map((w, i) => (
-              <WorkCard key={i} item={w} index={i} onOpen={() => setActive(w)} />
-            ))}
+        {/* Grid */}
+        {mobile ? (
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 12 }}>
+            {featured.map((w, i) => <WorkCard key={i} item={w} index={i} onOpen={() => setActive(w)} wide={false} />)}
           </div>
-        </div>
+        ) : (
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16 }}>
+            {featured.map((w, i) => <WorkCard key={i} item={w} index={i} onOpen={() => setActive(w)} wide={i === 0} />)}
+          </div>
+        )}
       </div>
 
       <AnimatePresence>
@@ -1394,7 +1381,7 @@ function WorksSection() {
   )
 }
 
-function WorkCard({ item, index, onOpen }) {
+function WorkCard({ item, index, onOpen, wide }) {
   const [h, setH] = useState(false)
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-40px' })
@@ -1402,34 +1389,28 @@ function WorkCard({ item, index, onOpen }) {
 
   return (
     <motion.div ref={ref}
-      initial={{ opacity: 0, y: 24 }} animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.55, delay: (index % 6) * 0.07, ease: [0.16, 0.84, 0.44, 1] }}
+      initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.5, delay: index * 0.06, ease: [0.16, 0.84, 0.44, 1] }}
       onClick={onOpen}
       onMouseEnter={() => setH(true)} onMouseLeave={() => setH(false)}
-      style={{ flexShrink: 0, width: 260, scrollSnapAlign: 'start', cursor: 'pointer', position: 'relative', border: `1px solid ${h ? 'rgba(201,168,76,.5)' : 'rgba(201,168,76,.15)'}`, transition: 'border-color .3s', background: '#111e17' }}
+      style={{ gridColumn: wide ? 'span 2' : 'span 1', cursor: 'pointer', background: CARD }}
     >
       {/* Photo */}
-      <div style={{ position: 'relative', paddingBottom: '133%', overflow: 'hidden' }}>
+      <div style={{ position: 'relative', paddingBottom: wide ? '66%' : '133%', overflow: 'hidden' }}>
         <img src={cover} alt={item.title} loading="lazy"
-          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', transform: h ? 'scale(1.06)' : 'scale(1)', transition: 'transform 0.9s cubic-bezier(.2,.8,.2,1)' }}
+          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', transform: h ? 'scale(1.05)' : 'scale(1)', transition: 'transform 0.9s cubic-bezier(.2,.8,.2,1)', filter: h ? 'brightness(1.08)' : 'brightness(.88)' }}
         />
-        {/* Overlay */}
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(10,21,16,.85) 0%, transparent 50%)', opacity: h ? 1 : 0.6, transition: 'opacity .3s' }}/>
-        {/* Photo count */}
-        <div style={{ position: 'absolute', top: 10, right: 10, background: 'rgba(10,21,16,.75)', backdropFilter: 'blur(4px)', border: `1px solid rgba(201,168,76,.25)`, padding: '3px 8px', color: '#8ab09a', fontSize: 10, fontFamily: 'Inter,sans-serif', letterSpacing: '1px' }}>
-          {item.photos.length} фото
-        </div>
+        {item.photos.length > 1 && (
+          <div style={{ position: 'absolute', top: 10, right: 10, background: 'rgba(10,21,16,.7)', backdropFilter: 'blur(4px)', border: `1px solid ${BDR}`, padding: '3px 9px', color: MUT, fontSize: 10, fontFamily: B, letterSpacing: '1px' }}>
+            {item.photos.length} фото
+          </div>
+        )}
       </div>
       {/* Info */}
-      <div style={{ padding: '14px 16px 18px' }}>
-        <h3 style={{ color: '#f5f0e8', fontSize: 16, fontFamily: 'Georgia,serif', fontStyle: 'italic', fontWeight: 400, margin: '0 0 6px' }}>{item.title}</h3>
-        <p style={{ color: '#8ab09a', fontSize: 12, fontFamily: 'Inter,sans-serif', fontWeight: 300, margin: 0, lineHeight: 1.5 }}>{item.material}</p>
+      <div style={{ padding: '12px 2px 4px' }}>
+        <h3 style={{ color: h ? W : 'rgba(245,240,232,.88)', fontSize: wide ? 17 : 14, fontFamily: D, fontStyle: 'italic', fontWeight: 400, margin: '0 0 4px', lineHeight: 1.2, transition: 'color .2s' }}>{item.title}</h3>
+        {item.material && <p style={{ color: MUT, fontSize: 11, fontFamily: B, fontWeight: 300, margin: 0, lineHeight: 1.5 }}>{item.material}</p>}
       </div>
-      {/* View hint */}
-      <motion.div animate={{ opacity: h ? 1 : 0 }} style={{ position: 'absolute', bottom: 18, right: 16, display: 'flex', alignItems: 'center', gap: 6, color: '#c9a84c' }}>
-        <span style={{ fontSize: 10, letterSpacing: '2px', textTransform: 'uppercase', fontFamily: 'Inter,sans-serif' }}>Смотреть</span>
-        <ChevronRight size={12} strokeWidth={2}/>
-      </motion.div>
     </motion.div>
   )
 }
