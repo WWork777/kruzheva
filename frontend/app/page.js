@@ -1351,13 +1351,11 @@ function WorksSection() {
 
         {/* Header row */}
         <Reveal>
-          <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', marginBottom: 36, flexWrap: 'wrap', gap: 16 }}>
-            <div>
-              <SectionEye>Авторские работы</SectionEye>
-              <h2 style={{ fontSize: 'clamp(34px,4.3vw,58px)', fontFamily: D, color: W, fontWeight: 300, letterSpacing: '-0.5px', margin: 0 }}>
-                Готовые <span style={{ color: G, fontStyle: 'italic' }}>изделия</span>
-              </h2>
-            </div>
+          <div style={{ textAlign: 'center', marginBottom: 36 }}>
+            <SectionEye>Авторские работы</SectionEye>
+            <h2 style={{ fontSize: 'clamp(34px,4.3vw,58px)', fontFamily: D, color: W, fontWeight: 300, letterSpacing: '-0.5px', margin: '0 0 24px' }}>
+              Готовые <span style={{ color: G, fontStyle: 'italic' }}>изделия</span>
+            </h2>
             <a href="/gallery" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, color: G, textDecoration: 'none', fontSize: 11, fontFamily: B, fontWeight: 500, letterSpacing: '2.5px', textTransform: 'uppercase', borderBottom: `1px solid rgba(201,168,76,.3)`, paddingBottom: 2, transition: 'border-color .3s' }}
               onMouseEnter={e => e.currentTarget.style.borderColor = G}
               onMouseLeave={e => e.currentTarget.style.borderColor = 'rgba(201,168,76,.3)'}
@@ -1370,7 +1368,7 @@ function WorksSection() {
         {/* Grid */}
         {mobile ? (
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 12 }}>
-            {WORK_CATS.map((c, i) => <WorkCard key={i} catItem={c} index={i} wide={false} />)}
+            {WORK_CATS.map((c, i) => <WorkCard key={i} catItem={c} index={i} wide={false} lastMobile={i === WORK_CATS.length - 1 && WORK_CATS.length % 2 !== 0} />)}
           </div>
         ) : (
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16 }}>
@@ -1382,7 +1380,7 @@ function WorksSection() {
   )
 }
 
-function WorkCard({ catItem, index, wide }) {
+function WorkCard({ catItem, index, wide, lastMobile }) {
   const [h, setH] = useState(false)
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-40px' })
@@ -1396,7 +1394,7 @@ function WorkCard({ catItem, index, wide }) {
       initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.5, delay: index * 0.06, ease: [0.16, 0.84, 0.44, 1] }}
       onMouseEnter={() => setH(true)} onMouseLeave={() => setH(false)}
-      style={{ gridColumn: wide ? 'span 2' : 'span 1', cursor: 'pointer', background: CARD, textDecoration: 'none', display: 'block' }}
+      style={{ gridColumn: wide || lastMobile ? 'span 2' : 'span 1', cursor: 'pointer', background: CARD, textDecoration: 'none', display: 'block' }}
     >
       {/* Photo */}
       <div style={{ position: 'relative', paddingBottom: wide ? '66%' : '133%', overflow: 'hidden' }}>

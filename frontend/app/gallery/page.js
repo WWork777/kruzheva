@@ -268,7 +268,12 @@ function GalleryContent() {
   const next = () => setLightbox(s => ({ ...s, photoIdx: s.photoIdx < s.item.photos.length - 1 ? s.photoIdx + 1 : 0 }))
   const thumb = (i) => setLightbox(s => ({ ...s, photoIdx: i }))
 
-  const filtered = activeCat === 'Все' ? WORKS : WORKS.filter(w => w.cat === activeCat)
+  const sorted = [...WORKS].sort((a, b) => {
+    if (a.cat === 'Меха и кожа' && b.cat !== 'Меха и кожа') return 1
+    if (a.cat !== 'Меха и кожа' && b.cat === 'Меха и кожа') return -1
+    return 0
+  })
+  const filtered = activeCat === 'Все' ? sorted : WORKS.filter(w => w.cat === activeCat)
 
   return (
     <div style={{ background: BG, minHeight: '100vh', color: W, fontFamily: B, overflowX: 'hidden', paddingTop: 76 }}>
