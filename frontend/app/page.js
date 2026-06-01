@@ -1397,7 +1397,7 @@ function WorkCard({ catItem, index, wide, lastMobile }) {
       style={{ gridColumn: wide || lastMobile ? 'span 2' : 'span 1', cursor: 'pointer', background: CARD, textDecoration: 'none', display: 'block' }}
     >
       {/* Photo */}
-      <div style={{ position: 'relative', paddingBottom: lastMobile ? '33%' : wide ? '66%' : '133%', overflow: 'hidden' }}>
+      <div style={{ position: 'relative', paddingBottom: lastMobile ? '48%' : wide ? '66%' : '133%', overflow: 'hidden' }}>
         <img src={src} alt={cat} loading="lazy"
           style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', transform: h ? 'scale(1.05)' : 'scale(1)', transition: 'transform 0.9s cubic-bezier(.2,.8,.2,1)', filter: h ? 'brightness(1)' : 'brightness(.75)' }}
         />
