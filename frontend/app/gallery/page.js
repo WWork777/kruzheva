@@ -1,6 +1,7 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
+import { useSearchParams } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 import { ChevronLeft, ChevronRight, X, Send, Phone } from 'lucide-react'
@@ -255,10 +256,12 @@ function CatalogCard({ item, index, onOpen }) {
   )
 }
 
-export default function GalleryPage() {
+function GalleryContent() {
   const mobile = useIsMobile()
   const [lightbox, setLightbox] = useState(null)
-  const [activeCat, setActiveCat] = useState('Все')
+  const searchParams = useSearchParams()
+  const initCat = searchParams.get('cat')
+  const [activeCat, setActiveCat] = useState(CATS.includes(initCat) ? initCat : 'Все')
 
   const openItem = (item) => setLightbox({ item, photoIdx: 0 })
   const prev = () => setLightbox(s => ({ ...s, photoIdx: s.photoIdx > 0 ? s.photoIdx - 1 : s.item.photos.length - 1 }))
@@ -350,5 +353,13 @@ export default function GalleryPage() {
         )}
       </AnimatePresence>
     </div>
+  )
+}
+
+export default function GalleryPage() {
+  return (
+    <Suspense fallback={<div style={{ background: '#0a1510', minHeight: '100vh' }}/>}>
+      <GalleryContent />
+    </Suspense>
   )
 }

@@ -1335,7 +1335,6 @@ function WorksModal({ item, onClose }) {
 }
 
 function WorksSection() {
-  const [active, setActive] = useState(null)
   const mobile = useIsMobile()
   const featured = WORKS.slice(0, 7)
 
@@ -1365,35 +1364,31 @@ function WorksSection() {
         {/* Grid */}
         {mobile ? (
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 12 }}>
-            {featured.map((w, i) => <WorkCard key={i} item={w} index={i} onOpen={() => setActive(w)} wide={false} />)}
+            {featured.map((w, i) => <WorkCard key={i} item={w} index={i} wide={false} />)}
           </div>
         ) : (
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16 }}>
-            {featured.map((w, i) => <WorkCard key={i} item={w} index={i} onOpen={() => setActive(w)} wide={i === 0} />)}
+            {featured.map((w, i) => <WorkCard key={i} item={w} index={i} wide={i === 0} />)}
           </div>
         )}
       </div>
-
-      <AnimatePresence>
-        {active && <WorksModal item={active} onClose={() => setActive(null)} />}
-      </AnimatePresence>
     </section>
   )
 }
 
-function WorkCard({ item, index, onOpen, wide }) {
+function WorkCard({ item, index, wide }) {
   const [h, setH] = useState(false)
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-40px' })
   const cover = `/items/${item.id}/${item.photos[0]}`
+  const href = `/gallery?cat=${encodeURIComponent(item.cat)}`
 
   return (
-    <motion.div ref={ref}
+    <motion.a ref={ref} href={href}
       initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.5, delay: index * 0.06, ease: [0.16, 0.84, 0.44, 1] }}
-      onClick={onOpen}
       onMouseEnter={() => setH(true)} onMouseLeave={() => setH(false)}
-      style={{ gridColumn: wide ? 'span 2' : 'span 1', cursor: 'pointer', background: CARD }}
+      style={{ gridColumn: wide ? 'span 2' : 'span 1', cursor: 'pointer', background: CARD, textDecoration: 'none', display: 'block' }}
     >
       {/* Photo */}
       <div style={{ position: 'relative', paddingBottom: wide ? '66%' : '133%', overflow: 'hidden' }}>
@@ -1411,7 +1406,7 @@ function WorkCard({ item, index, onOpen, wide }) {
         <h3 style={{ color: h ? W : 'rgba(245,240,232,.88)', fontSize: wide ? 17 : 14, fontFamily: D, fontStyle: 'italic', fontWeight: 400, margin: '0 0 4px', lineHeight: 1.2, transition: 'color .2s' }}>{item.title}</h3>
         {item.material && <p style={{ color: MUT, fontSize: 11, fontFamily: B, fontWeight: 300, margin: 0, lineHeight: 1.5 }}>{item.material}</p>}
       </div>
-    </motion.div>
+    </motion.a>
   )
 }
 
