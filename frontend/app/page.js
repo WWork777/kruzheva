@@ -1334,9 +1334,15 @@ function WorksModal({ item, onClose }) {
   )
 }
 
+const WORK_CATS = ['Жакеты','Верхняя одежда','Рубашки и блузы','Платья','Брюки','Костюмы','Меха и кожа']
+  .map(cat => ({
+    cat,
+    count: WORKS.filter(w => w.cat === cat).length,
+    cover: WORKS.find(w => w.cat === cat),
+  }))
+
 function WorksSection() {
   const mobile = useIsMobile()
-  const featured = WORKS.slice(0, 7)
 
   return (
     <section style={{ padding: mobile ? '72px 20px' : '100px 28px', background: '#0a1510', position: 'relative', overflow: 'hidden' }}>
@@ -1364,11 +1370,11 @@ function WorksSection() {
         {/* Grid */}
         {mobile ? (
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 12 }}>
-            {featured.map((w, i) => <WorkCard key={i} item={w} index={i} wide={false} />)}
+            {WORK_CATS.map((c, i) => <WorkCard key={i} catItem={c} index={i} wide={false} />)}
           </div>
         ) : (
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16 }}>
-            {featured.map((w, i) => <WorkCard key={i} item={w} index={i} wide={i === 0} />)}
+            {WORK_CATS.map((c, i) => <WorkCard key={i} catItem={c} index={i} wide={i === 0} />)}
           </div>
         )}
       </div>
@@ -1376,12 +1382,14 @@ function WorksSection() {
   )
 }
 
-function WorkCard({ item, index, wide }) {
+function WorkCard({ catItem, index, wide }) {
   const [h, setH] = useState(false)
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-40px' })
-  const cover = `/items/${item.id}/${item.photos[0]}`
-  const href = `/gallery?cat=${encodeURIComponent(item.cat)}`
+  const { cat, count, cover } = catItem
+  const src = cover ? `/items/${cover.id}/${cover.photos[0]}` : ''
+  const href = `/gallery?cat=${encodeURIComponent(cat)}`
+  const decl = n => n === 1 ? 'изделие' : n < 5 ? 'изделия' : 'изделий'
 
   return (
     <motion.a ref={ref} href={href}
@@ -1392,19 +1400,20 @@ function WorkCard({ item, index, wide }) {
     >
       {/* Photo */}
       <div style={{ position: 'relative', paddingBottom: wide ? '66%' : '133%', overflow: 'hidden' }}>
-        <img src={cover} alt={item.title} loading="lazy"
-          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', transform: h ? 'scale(1.05)' : 'scale(1)', transition: 'transform 0.9s cubic-bezier(.2,.8,.2,1)', filter: h ? 'brightness(1.08)' : 'brightness(.88)' }}
+        <img src={src} alt={cat} loading="lazy"
+          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', transform: h ? 'scale(1.05)' : 'scale(1)', transition: 'transform 0.9s cubic-bezier(.2,.8,.2,1)', filter: h ? 'brightness(1)' : 'brightness(.75)' }}
         />
-        {item.photos.length > 1 && (
-          <div style={{ position: 'absolute', top: 10, right: 10, background: 'rgba(10,21,16,.7)', backdropFilter: 'blur(4px)', border: `1px solid ${BDR}`, padding: '3px 9px', color: MUT, fontSize: 10, fontFamily: B, letterSpacing: '1px' }}>
-            {item.photos.length} фото
-          </div>
-        )}
-      </div>
-      {/* Info */}
-      <div style={{ padding: '12px 2px 4px' }}>
-        <h3 style={{ color: h ? W : 'rgba(245,240,232,.88)', fontSize: wide ? 17 : 14, fontFamily: D, fontStyle: 'italic', fontWeight: 400, margin: '0 0 4px', lineHeight: 1.2, transition: 'color .2s' }}>{item.title}</h3>
-        {item.material && <p style={{ color: MUT, fontSize: 11, fontFamily: B, fontWeight: 300, margin: 0, lineHeight: 1.5 }}>{item.material}</p>}
+        {/* Dark gradient overlay */}
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(10,21,16,.8) 0%, rgba(10,21,16,.1) 60%)', transition: 'opacity .3s' }}/>
+        {/* Category name over photo */}
+        <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: wide ? '20px 20px' : '14px 14px' }}>
+          <h3 style={{ color: W, fontSize: wide ? 'clamp(18px,2vw,26px)' : 15, fontFamily: D, fontStyle: 'italic', fontWeight: 400, margin: '0 0 4px', lineHeight: 1.2, transition: 'color .2s' }}>{cat}</h3>
+          <p style={{ color: h ? GL : MUT, fontSize: 11, fontFamily: B, fontWeight: 300, margin: 0, letterSpacing: '1px', transition: 'color .3s' }}>{count} {decl(count)}</p>
+        </div>
+        {/* Arrow on hover */}
+        <div style={{ position: 'absolute', top: 12, right: 12, width: 32, height: 32, border: `1px solid ${h ? G : 'rgba(201,168,76,.3)'}`, display: 'flex', alignItems: 'center', justifyContent: 'center', color: h ? G : MUT, transition: 'all .3s', opacity: h ? 1 : 0.6 }}>
+          <ChevronRight size={14} strokeWidth={2}/>
+        </div>
       </div>
     </motion.a>
   )
