@@ -1256,6 +1256,7 @@ const WORKS = [
   { id: 'item_27', cat: 'Платья',          title: 'Платье из крепдешина',      material: 'Натуральный крепдешин, подкладка из вискозного батиста',             photos: ['photo_2025-07-24_20-12-51.jpg','photo_2026-05-31_21-43-26.jpg','photo_2026-05-31_21-43-28.jpg','photo_2026-05-31_21-43-33.jpg','photo_2026-05-31_21-43-36.jpg','photo_2026-05-31_21-43-38.jpg','photo_2026-05-31_21-43-39.jpg'] },
   { id: 'item_28', cat: 'Платья',          title: 'Платье из крепдешина',      material: 'Натуральный крепдешин, подкладка из натурального шёлка',             photos: ['photo_2026-01-28_18-36-42.jpg','photo_2026-01-28_18-36-56.jpg','photo_2026-05-31_21-45-36.jpg','photo_2026-05-31_21-45-40.jpg'] },
   { id: 'item_29', cat: 'Платья',          title: 'Платье из льна',            material: 'Лён 100%, отделка из кружева 100% хлопок',                          photos: ['photo_2026-05-31_21-49-02.jpg','photo_2026-05-31_21-49-02_2.jpg','photo_2026-05-31_21-49-02_3.jpg','photo_2026-05-31_21-49-02_4.jpg','photo_2026-05-31_21-49-02_5.jpg','photo_2026-05-31_21-49-02_6.jpg','photo_2026-05-31_21-49-02_7.jpg','photo_2026-05-31_21-49-02_8.jpg','photo_2026-05-31_21-49-02_9.jpg'] },
+  { id: 'item_30', cat: 'Декор',           title: 'Декор',                     material: '',                                                                   photos: ['photo_2026-06-01_18-12-01.jpg','photo_2026-06-01_18-12-06.jpg','photo_2026-06-01_18-12-15.jpg','photo_2026-06-01_18-12-21.jpg','photo_2026-06-01_18-12-23.jpg','photo_2026-06-01_18-12-24.jpg','photo_2026-06-01_18-12-25.jpg','photo_2026-06-01_18-12-26.jpg','photo_2026-06-01_18-12-26_2.jpg','photo_2026-06-01_18-12-27.jpg','photo_2026-06-01_18-12-29.jpg','photo_2026-06-01_18-16-08.jpg'] },
 ]
 
 function WorksModal({ item, onClose }) {
@@ -1698,7 +1699,7 @@ function Gallery() {
     { src: R('photo_105.jpg'), title: 'Шуба из натурального меха',  span: 1 },
     { src: R('photo_53.jpg'),  title: 'Знак качества',              span: 1 },
     { src: R('photo_104.jpg'), title: 'Жакет Шанель — детали',     span: 1 },
-    { src: R('photo_95.jpg'),  title: 'Декор',                      span: 1 },
+    { src: R('photo_95.jpg'),  title: 'Декор', href: '/gallery?cat=%D0%94%D0%B5%D0%BA%D0%BE%D1%80', span: 1 },
     { src: R('photo_82.jpg'),  title: '85% ручной работы',          span: 2 },
   ]
   return (
@@ -1747,10 +1748,12 @@ function Gallery() {
   )
 }
 
-function GalleryItem({ src, title }) {
+function GalleryItem({ src, title, href }) {
   const [h, setH] = useState(false)
+  const Tag = href ? 'a' : 'div'
   return (
-    <div
+    <Tag
+      href={href || undefined}
       onMouseEnter={() => setH(true)}
       onMouseLeave={() => setH(false)}
       style={{
@@ -1758,6 +1761,7 @@ function GalleryItem({ src, title }) {
         border: `1px solid ${h ? BDR2 : 'transparent'}`, transition: 'border .3s',
         width: '100%', height: '100%', background: CARD,
         transform: 'translateZ(0)', isolation: 'isolate',
+        textDecoration: 'none', display: 'block',
       }}
     >
       <img
@@ -1784,7 +1788,7 @@ function GalleryItem({ src, title }) {
           transform: h ? 'translateY(0)' : 'translateY(6px)', transition: 'transform .35s',
         }}>{title}</div>
       </div>
-    </div>
+    </Tag>
   )
 }
 
