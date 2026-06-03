@@ -363,9 +363,10 @@ const LEAD_FIELD = {
 function LeadModal({ state, onClose }) {
   const [name, setName] = useState('')
   const [phone, setPhone] = useState('')
+  const [agree, setAgree] = useState(false)
   const [sent, setSent] = useState(false)
   useEffect(() => {
-    if (state.open) { setName(''); setPhone(''); setSent(false) }
+    if (state.open) { setName(''); setPhone(''); setAgree(false); setSent(false) }
   }, [state.open])
   useEffect(() => {
     const onKey = (e) => { if (e.key === 'Escape') onClose() }
@@ -419,13 +420,18 @@ function LeadModal({ state, onClose }) {
             <form onSubmit={submit} style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
               <input value={name} onChange={(e) => setName(e.target.value)} required placeholder="Ваше имя" data-testid="lead-name" style={LEAD_FIELD} />
               <input value={phone} onChange={(e) => setPhone(e.target.value)} required type="tel" placeholder="Телефон" data-testid="lead-phone" style={LEAD_FIELD} />
+              <label style={{ display: 'flex', alignItems: 'flex-start', gap: 10, cursor: 'pointer', marginTop: 2 }}>
+                <input type="checkbox" checked={agree} onChange={(e) => setAgree(e.target.checked)} required data-testid="lead-agree"
+                  style={{ width: 16, height: 16, marginTop: 2, accentColor: G, flexShrink: 0, cursor: 'pointer' }} />
+                <span style={{ color: MUT, fontSize: 11, lineHeight: 1.6, fontFamily: B, fontWeight: 300 }}>
+                  Я согласен(а) на обработку персональных данных и принимаю условия{' '}
+                  <a href="/docs/privacy-policy.pdf" target="_blank" rel="noopener noreferrer" style={{ color: G, textDecoration: 'underline' }}>политики конфиденциальности</a>
+                </span>
+              </label>
               <div style={{ marginTop: 6 }}>
                 <Btn type="submit" block icon={Send} testId="lead-submit">Отправить заявку</Btn>
               </div>
             </form>
-            <p style={{ color: MUT, fontSize: 11, lineHeight: 1.6, fontFamily: B, fontWeight: 300, marginTop: 16, textAlign: 'center' }}>
-              Нажимая кнопку, вы соглашаетесь на обработку персональных данных
-            </p>
           </>
         )}
       </div>
@@ -2331,9 +2337,15 @@ function SocBtn({ href, label, children, testId }) {
 }
 
 // ============ FOOTER ============
+const DOCS = [
+  { label: 'Политика конфиденциальности', href: '/docs/privacy-policy.pdf' },
+  { label: 'Пользовательское соглашение', href: '/docs/user-agreement.pdf' },
+  { label: 'Политика обработки cookie',   href: '/docs/cookie-policy.pdf' },
+]
+
 function Footer() {
   return (
-    <footer style={{ background: CARD, borderTop: `1px solid ${BDR}`, padding: '48px 28px' }}>
+    <footer style={{ background: CARD, borderTop: `1px solid ${BDR}`, padding: '48px 28px 32px' }}>
       <motion.div
         initial="hidden"
         whileInView="visible"
@@ -2359,6 +2371,22 @@ function Footer() {
           © 2026 Кружева
         </motion.div>
       </motion.div>
+
+      {/* Документы */}
+      <div style={{ maxWidth: 1280, margin: '28px auto 0', paddingTop: 24, borderTop: `1px solid ${BDR}`, display: 'flex', flexWrap: 'wrap', gap: '10px 28px', justifyContent: 'center' }}>
+        {DOCS.map((d) => (
+          <a key={d.href} href={d.href} target="_blank" rel="noopener noreferrer"
+            style={{ color: MUT, fontSize: 12, fontFamily: B, fontWeight: 300, textDecoration: 'none', transition: 'color .3s' }}
+            onMouseEnter={(e) => e.currentTarget.style.color = G}
+            onMouseLeave={(e) => e.currentTarget.style.color = MUT}
+          >{d.label}</a>
+        ))}
+      </div>
+
+      {/* Реквизиты */}
+      <div style={{ maxWidth: 1280, margin: '18px auto 0', textAlign: 'center', color: MUT, fontSize: 11, fontFamily: B, fontWeight: 300, lineHeight: 1.7, opacity: 0.75 }}>
+        ИП Крузель Инна Александровна · ИНН: 420534677434
+      </div>
     </footer>
   )
 }
