@@ -365,8 +365,10 @@ function LeadModal({ state, onClose }) {
   const [phone, setPhone] = useState('')
   const [agree, setAgree] = useState(false)
   const [sent, setSent] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
   useEffect(() => {
-    if (state.open) { setName(''); setPhone(''); setAgree(false); setSent(false) }
+    if (state.open) { setName(''); setPhone(''); setAgree(false); setSent(false); setLoading(false); setError('') }
   }, [state.open])
   useEffect(() => {
     const onKey = (e) => { if (e.key === 'Escape') onClose() }
@@ -375,11 +377,27 @@ function LeadModal({ state, onClose }) {
   }, [state.open, onClose])
   if (!state.open) return null
 
-  const submit = (e) => {
+  const submit = async (e) => {
     e.preventDefault()
-    const msg = `Заявка с сайта!\nИмя: ${name}\nТелефон: ${phone}${state.service ? `\nУслуга: ${state.service}` : ''}`
-    window.open(`https://t.me/to_palto_atelier?text=${encodeURIComponent(msg)}`, '_blank')
-    setSent(true)
+    setLoading(true)
+    setError('')
+    try {
+      const res = await fetch('/api/lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, phone, service: state.service || '' }),
+      })
+      const data = await res.json().catch(() => ({}))
+      if (res.ok && data.ok) {
+        setSent(true)
+      } else {
+        setError('Не удалось отправить заявку. Напишите нам в Телеграм.')
+      }
+    } catch (err) {
+      setError('Не удалось отправить заявку. Напишите нам в Телеграм.')
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -428,8 +446,13 @@ function LeadModal({ state, onClose }) {
                   <a href="/docs/privacy-policy.pdf" target="_blank" rel="noopener noreferrer" style={{ color: G, textDecoration: 'underline' }}>политики конфиденциальности</a>
                 </span>
               </label>
+              {error && (
+                <p style={{ color: '#e8927c', fontSize: 12, fontFamily: B, fontWeight: 300, lineHeight: 1.5, margin: 0 }}>
+                  {error} <a href={TG} target="_blank" rel="noopener noreferrer" style={{ color: G, textDecoration: 'underline' }}>Написать</a>
+                </p>
+              )}
               <div style={{ marginTop: 6 }}>
-                <Btn type="submit" block icon={Send} testId="lead-submit">Отправить заявку</Btn>
+                <Btn type="submit" block icon={Send} testId="lead-submit">{loading ? 'Отправляем…' : 'Отправить заявку'}</Btn>
               </div>
             </form>
           </>
