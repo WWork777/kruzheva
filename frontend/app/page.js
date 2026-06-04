@@ -2408,7 +2408,7 @@ function Footer() {
 
       {/* Реквизиты */}
       <div style={{ maxWidth: 1280, margin: '18px auto 0', textAlign: 'center', color: MUT, fontSize: 11, fontFamily: B, fontWeight: 300, lineHeight: 1.7, opacity: 0.75 }}>
-        ИП Крузель Инна Александровна · ИНН: 420534677434
+Крузель Инна Александровна · ИНН: 420534677434
       </div>
     </footer>
   )
